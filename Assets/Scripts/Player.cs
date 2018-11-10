@@ -5,16 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour {
 
-    public Sprite grass;
     public GameObject self;
     public float speed;
-    public LayerMask m_LayerMask;
-
-    RandomSpawn r;
+    public Tilemap map;
 
     float moveTime;
     int direction;
-    Vector3 v;
+    Vector3 playerPos;
 
     bool m_started;
 
@@ -22,88 +19,139 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        v = self.transform.position;
+        playerPos = self.transform.position;
         moveTime = 0;
-        m_started = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //moveRandomly();
-        seek();
-        moveByKey();
+        map = Component.FindObjectOfType<Tilemap>();
 	}
 
+    // Update is called once per frame
+    void Update()
+    {
+        seek("bush");
+        if(self.GetComponent<BunnyTraits>().gender == 0)
+        {
+            seek("female");
+        }
+        else
+        {
+            seek("male");
+        }
+        
+        mate();
+    }
+
+    void seek(string tag)
+    {
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(self.transform.position, transform.localScale * 4, 360);
+        if (colliders.Length > 2)
+        {
+            int rand = Random.Range(0, colliders.Length);
+
+            //***to fix*** the bunnies sometimes ignore the food for one round and move randomly
+            //then come back to it the next round
+            if (colliders[rand].tag != tag)
+            {
+                rand = Random.Range(0, colliders.Length);
+                moveRandomly();
+            }
+            
+                if (Time.time > moveTime)
+                {
+                    moveTime += (10 - speed);
+                    if (playerPos.x < colliders[rand].transform.position.x)
+                    {
+                        playerPos.x++;
+                    }
+                    else if (playerPos.x > colliders[rand].transform.position.x)
+                    {
+                        playerPos.x--;
+                    }
+                    else if (playerPos.y < colliders[rand].transform.position.y)
+                    {
+                        playerPos.y++;
+                    }
+                    else if (playerPos.y > colliders[rand].transform.position.y)
+                    {
+                        playerPos.y--;
+                    }
+ 
+                    self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
+                }
+            
+        }
+        else
+        {
+            moveRandomly();
+        }
+    }
 
     void moveRandomly()
     {
         int rand = Random.Range(0, 100);
-        if(rand > 70)
+        if (rand > 70)
         {
             direction = Random.Range(0, 4);
         }
-        
 
-        if(Time.time > moveTime)
+        if (Time.time > moveTime)
         {
-            moveTime += (10-speed);
+            moveTime += (10 - speed);
             switch (direction)
             {
                 case 0:
-                    v.y += 1;
+                    if (playerPos.x < (map.size.x / 2) - 1) { playerPos.x++; }
                     break;
                 case 1:
-                    v.y -= 1;
+                    if (playerPos.x > (-map.size.x / 2)) { playerPos.x--; }
                     break;
                 case 2:
-                    v.x += 1;
+                    if (playerPos.y < (map.size.y / 2) - 1) { playerPos.y++; }
                     break;
                 case 3:
-                    v.x -= 1;
+                    if (playerPos.y > (-map.size.y / 2)) { playerPos.y--; }
                     break;
             }
-            self.transform.SetPositionAndRotation(v, Quaternion.identity);
+            self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
         }
     }
-
-
 
     void moveByKey()
     {
         if (Input.GetKeyDown("w"))
         {
-            v.y += 1;
-            self.transform.SetPositionAndRotation(v, Quaternion.identity);
+            playerPos.y += 1;
+
         }
         else if (Input.GetKeyDown("s"))
         {
-            v.y -= 1;
-            self.transform.SetPositionAndRotation(v, Quaternion.identity);
+            playerPos.y -= 1;
         }
         else if (Input.GetKeyDown("a"))
         {
-            v.x -= 1;
-            self.transform.SetPositionAndRotation(v, Quaternion.identity);
+            playerPos.x -= 1;
         }
         else if (Input.GetKeyDown("d"))
         {
-            v.x += 1;
-            self.transform.SetPositionAndRotation(v, Quaternion.identity);
+            playerPos.x += 1;
         }
-
+        self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
     }
 
-    void seek()
-    {
-        List<Collider2D> hitColliders = new List<Collider2D>();
-        hitColliders.Add(Physics2D.OverlapBox(self.transform.position, transform.localScale*4, 360));
-        int i = 0;
-        while (i < hitColliders.Count)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {      
+        if (collision.gameObject.tag == "bush")
         {
-            //Debug.Log("Hit: " + hitColliders[i].name + i);
-            i++;
+            Object.Destroy(collision.gameObject);
+            self.GetComponent<BunnyTraits>().foodLevel += 10;
         }
-        Debug.Log(hitColliders.Count);
+    }
+
+    void mate()
+    {
+        if (self.GetComponent<BunnyTraits>().canMate())
+        {
+            Debug.Log(self.name + " Ready To Mate");
+        }
     }
 
     void OnDrawGizmos()
@@ -112,6 +160,6 @@ public class Player : MonoBehaviour {
         //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
         if (m_started)
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-            Gizmos.DrawWireCube(transform.position, transform.localScale*4);
+            Gizmos.DrawWireCube(transform.position, transform.localScale * 4);
     }
 }

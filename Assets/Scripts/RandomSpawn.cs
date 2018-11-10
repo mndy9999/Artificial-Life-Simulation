@@ -6,8 +6,11 @@ using UnityEngine.Tilemaps;
 public class RandomSpawn : MonoBehaviour {
 
     public float nextActionTime;
+    public int numberOfBunnies;
     public Tilemap spawnArea;
-    public Tile bush;
+    public Tile bushTile;
+    public GameObject bushGO;
+    public GameObject bunnyGO;
 
     public List <Tile> grassArr;
 
@@ -18,7 +21,13 @@ public class RandomSpawn : MonoBehaviour {
 	void Start () {
         time = 0;
         grassArr = new List<Tile>();
-	}
+    
+        for(int i = 0; i < numberOfBunnies; i++)
+        {
+            spawnBunny();
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,18 +40,16 @@ public class RandomSpawn : MonoBehaviour {
         
     }
 
+    void spawnBunny()
+    {
+        v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
+        Instantiate(bunnyGO, v, Quaternion.identity);
+    }
+
     void spawnBush()
     {
         v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
-        if(spawnArea.GetTile(v) != bush)
-        {
-            spawnArea.SetTile(v, bush);
-            grassArr.Add((Tile)spawnArea.GetTile(v));
+        Instantiate(bushGO, v, Quaternion.identity);
 
-        }
-        else
-        {
-            Debug.Log("Grass is there already");
-        }
     }
 }
