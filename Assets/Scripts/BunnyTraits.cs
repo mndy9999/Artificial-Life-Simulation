@@ -28,7 +28,7 @@ public class BunnyTraits : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        setTag();
     }
 
     public bool canMate()
@@ -40,7 +40,7 @@ public class BunnyTraits : MonoBehaviour
     {
         if (foodLevel > 70)
         {
-            if (gender == 0)
+            if (gender == Gender.male)
             {
                 self.gameObject.tag = "male";
             }
@@ -50,4 +50,9 @@ public class BunnyTraits : MonoBehaviour
             }
         }
     }
+
+
+
+
+
 }

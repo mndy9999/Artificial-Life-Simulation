@@ -9,12 +9,14 @@ public class Player : MonoBehaviour {
     public float speed;
     public Tilemap map;
 
+    Collider2D target;
+
     float moveTime;
     int direction;
     Vector3 playerPos;
 
     bool m_started;
-
+    bool foundTarget;
     
 
 	// Use this for initialization
@@ -22,66 +24,93 @@ public class Player : MonoBehaviour {
         playerPos = self.transform.position;
         moveTime = 0;
         map = Component.FindObjectOfType<Tilemap>();
-	}
+        m_started = true;
+        foundTarget = false;
+        target = null;
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        seek("bush");
-        if(self.GetComponent<BunnyTraits>().gender == 0)
+        if (self.GetComponent<BunnyTraits>().canMate())
         {
-            seek("female");
+            if (self.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
+            else{ seek("bush", "male"); }
         }
         else
         {
-            seek("male");
+            seek("bush", "null");
         }
         
-        mate();
+       
     }
 
-    void seek(string tag)
+    void seek(string tag, string mate)
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(self.transform.position, transform.localScale * 4, 360);
-        if (colliders.Length > 2)
-        {
-            int rand = Random.Range(0, colliders.Length);
 
-            //***to fix*** the bunnies sometimes ignore the food for one round and move randomly
-            //then come back to it the next round
-            if (colliders[rand].tag != tag)
+        if (colliders.Length > 1)
+        {
+            for(int i = 0; i < colliders.Length; i++)
             {
-                rand = Random.Range(0, colliders.Length);
+               // Debug.Log(self.gameObject.name + " COLLIDERS: \n" + colliders[i].gameObject.name);
+                if(mate != null && colliders[i].tag == mate)
+                {
+                    foundTarget = true;
+                    target = colliders[i];
+                    break;
+                }
+                else if (colliders[i].tag == tag)
+                {
+                    foundTarget = true;
+                    target = colliders[i];
+                    break;
+                }
+            }
+            if (foundTarget)
+            {
+               // Debug.Log(self.gameObject.name + "    Go towards: " + target.gameObject.name);
+                moveTowards(target);
+                breed(target.gameObject);
+            }
+            else
+            {
+               // Debug.Log(self.gameObject.name + "    Move Randomly");
                 moveRandomly();
             }
-            
-                if (Time.time > moveTime)
-                {
-                    moveTime += (10 - speed);
-                    if (playerPos.x < colliders[rand].transform.position.x)
-                    {
-                        playerPos.x++;
-                    }
-                    else if (playerPos.x > colliders[rand].transform.position.x)
-                    {
-                        playerPos.x--;
-                    }
-                    else if (playerPos.y < colliders[rand].transform.position.y)
-                    {
-                        playerPos.y++;
-                    }
-                    else if (playerPos.y > colliders[rand].transform.position.y)
-                    {
-                        playerPos.y--;
-                    }
- 
-                    self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
-                }
-            
+            foundTarget= false;
         }
         else
         {
             moveRandomly();
+        }
+
+    }
+
+    void moveTowards(Collider2D col)
+    {
+        if (Time.time > moveTime)
+        {
+            moveTime += (10 - speed);
+            if (playerPos.x < col.transform.position.x)
+            {
+                playerPos.x++;
+            }
+            else if (playerPos.x > col.transform.position.x)
+            {
+                playerPos.x--;
+            }
+            else if (playerPos.y < col.transform.position.y)
+            {
+                playerPos.y++;
+            }
+            else if (playerPos.y > col.transform.position.y)
+            {
+                playerPos.y--;
+            }
+
+            self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
         }
     }
 
@@ -146,12 +175,29 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void mate()
+    /// <summary>
+    /// BUG: food level goes down randomly
+    /// </summary>
+    /// <param name="partner"></param>
+    void breed(GameObject partner)
     {
-        if (self.GetComponent<BunnyTraits>().canMate())
-        {
-            Debug.Log(self.name + " Ready To Mate");
+        if(playerPos == partner.transform.position)
+        {        
+            this.GetComponent<BunnyTraits>().foodLevel -= 50;
+            partner.GetComponent<BunnyTraits>().foodLevel -= 50;
+            
         }
+    }
+
+    public string getTarget()
+    {
+        if(target) { return target.name; }
+        else { return "NULL"; }       
+    }
+
+    Vector3Int genRandomPos()
+    {
+        return new Vector3Int(Random.Range(-map.size.x / 2, map.size.x / 2), Random.Range(-map.size.y / 2, map.size.y / 2), 0);
     }
 
     void OnDrawGizmos()

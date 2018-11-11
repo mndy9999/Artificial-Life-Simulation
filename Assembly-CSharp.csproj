@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BunnyTraits.cs" />
     <Compile Include="Assets\Scripts\GridDraw.cs" />
+    <Compile Include="Assets\Scripts\PanelTextUpdate.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RandomSpawn.cs" />
     <Compile Include="Assets\Scripts\TileCheck.cs" />
