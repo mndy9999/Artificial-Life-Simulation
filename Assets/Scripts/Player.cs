@@ -182,16 +182,11 @@ public class Player : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// BUG: food level goes down randomly
-    /// </summary>
-    /// <param name="partner"></param>
     void breed(GameObject partner)
     {
-        Debug.Log(Vector3.Distance(transform.position, partner.transform.position));
+        transform.position = Vector3.Lerp(transform.position, partner.transform.position, 1 * Time.deltaTime);
         if(Vector3.Distance(transform.position, partner.transform.position) < 1f)
         {
-            Debug.Log("Breeding");
             gameObject.GetComponent<BunnyTraits>().foodLevel -= 50;
             partner.GetComponent<BunnyTraits>().foodLevel -= 50;
             spawn.spawnBunny();
@@ -211,7 +206,9 @@ public class Player : MonoBehaviour {
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        if (gameObject.GetComponent<BunnyTraits>().canMate()) { Gizmos.color = Color.red; }
+        else { Gizmos.color = Color.blue; }
+        
         //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
         if (m_started)
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
