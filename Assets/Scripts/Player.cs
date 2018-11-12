@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     float moveTime;
     int direction;
     Vector3 playerPos;
+    Vector3 targetPos;
 
     bool m_started;
     bool foundTarget;
@@ -30,18 +31,27 @@ public class Player : MonoBehaviour {
 
     }
 
+    [SerializeField]
+    float frameSpeed = 0.05f;
+    float count = 0.0f;
+    float epoch = 1f;
+
     // Update is called once per frame
     void Update()
     {
+
+        playerPos = transform.position;
+        
         if (self.GetComponent<BunnyTraits>().canMate())
-        {
-            if (self.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
-            else{ seek("bush", "male"); }
-        }
-        else
-        {
-            seek("bush", "null");
-        }
+            {
+                if (self.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
+                else { seek("bush", "male"); }
+            }
+            else
+            {
+                seek("bush", "null");
+            }
+           
         
        
     }
@@ -76,7 +86,7 @@ public class Player : MonoBehaviour {
             }
             else
             {
-               // Debug.Log(self.gameObject.name + "    Move Randomly");
+                // Debug.Log(self.gameObject.name + "    Move Randomly");
                 moveRandomly();
             }
             foundTarget= false;
@@ -90,58 +100,78 @@ public class Player : MonoBehaviour {
 
     void moveTowards(Collider2D col)
     {
-        if (Time.time > moveTime)
+        targetPos = col.transform.position;
+        if (playerPos.x < col.transform.position.x)
         {
-            moveTime += (10 - speed);
-            if (playerPos.x < col.transform.position.x)
-            {
-                playerPos.x++;
-            }
-            else if (playerPos.x > col.transform.position.x)
-            {
-                playerPos.x--;
-            }
-            else if (playerPos.y < col.transform.position.y)
-            {
-                playerPos.y++;
-            }
-            else if (playerPos.y > col.transform.position.y)
-            {
-                playerPos.y--;
-            }
-
-            self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
+            targetPos.x++;
         }
+        else if (playerPos.x > col.transform.position.x)
+        {
+            targetPos.x--;
+        }
+        else if (playerPos.y < col.transform.position.y)
+        {
+            targetPos.y++;
+        }
+        else if (playerPos.y > col.transform.position.y)
+        {
+            targetPos.y--;
+            
+        }
+        Debug.Log(gameObject.name + ": MOVE TOWARDS");
+        StartCoroutine(move(targetPos));
     }
 
     void moveRandomly()
     {
+        targetPos = playerPos;
+
         int rand = Random.Range(0, 100);
         if (rand > 70)
         {
             direction = Random.Range(0, 4);
         }
+        
 
-        if (Time.time > moveTime)
+        switch (direction)
         {
-            moveTime += (10 - speed);
-            switch (direction)
-            {
-                case 0:
-                    if (playerPos.x < (map.size.x / 2) - 1) { playerPos.x++; }
-                    break;
-                case 1:
-                    if (playerPos.x > (-map.size.x / 2)) { playerPos.x--; }
-                    break;
-                case 2:
-                    if (playerPos.y < (map.size.y / 2) - 1) { playerPos.y++; }
-                    break;
-                case 3:
-                    if (playerPos.y > (-map.size.y / 2)) { playerPos.y--; }
-                    break;
-            }
-            self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
+            case 0:
+                if (playerPos.x < (map.size.x / 2) - 1)
+                {
+                    targetPos.x++;
+                }
+                break;
+            case 1:
+                if (playerPos.x > (-map.size.x / 2))
+                {
+                    targetPos.x--;
+                }
+                break;
+            case 2:
+                if (playerPos.y < (map.size.y / 2) - 1)
+                {
+                    targetPos.y++;
+                }
+                break;
+            case 3:
+                if (playerPos.y > (-map.size.y / 2))
+                {
+                    targetPos.y--;
+                }
+                break;
         }
+        Debug.Log(gameObject.name + ": MOVE RANDOMLY");
+
+
+        StartCoroutine(move(targetPos));
+
+    }
+
+    IEnumerator move(Vector3 targetPos)
+    {
+        transform.position = Vector3.MoveTowards(playerPos, targetPos, 1 * Time.deltaTime);
+        
+        yield return null;
     }
 
     void moveByKey()
@@ -183,8 +213,8 @@ public class Player : MonoBehaviour {
     {
         if(playerPos == partner.transform.position)
         {        
-            this.GetComponent<BunnyTraits>().foodLevel -= 50;
-            partner.GetComponent<BunnyTraits>().foodLevel -= 50;
+          //  this.GetComponent<BunnyTraits>().foodLevel -= 50;
+          //  partner.GetComponent<BunnyTraits>().foodLevel -= 50;
             
         }
     }
