@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     public GameObject self;
     public float speed;
     public Tilemap map;
+    public RandomSpawn spawn;
 
     Collider2D target;
 
@@ -16,56 +17,54 @@ public class Player : MonoBehaviour {
     Vector3 playerPos;
     Vector3 targetPos;
 
+
+
     bool m_started;
     bool foundTarget;
-    
+    bool coRun;
 
 	// Use this for initialization
 	void Start () {
         playerPos = self.transform.position;
+        targetPos = playerPos;
         moveTime = 0;
         map = Component.FindObjectOfType<Tilemap>();
         m_started = true;
         foundTarget = false;
         target = null;
-
+        coRun = false;
+        Debug.Log(map.size);
     }
-
-    [SerializeField]
-    float frameSpeed = 0.05f;
-    float count = 0.0f;
-    float epoch = 1f;
 
     // Update is called once per frame
     void Update()
     {
-
         playerPos = transform.position;
-        
+
         if (self.GetComponent<BunnyTraits>().canMate())
-            {
-                if (self.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
-                else { seek("bush", "male"); }
-            }
-            else
-            {
-                seek("bush", "null");
-            }
-           
-        
-       
+        {
+            if (self.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
+            else { seek("bush", "male"); }
+        }
+        else
+        {
+            seek("bush", "null");
+        }
+        //moveRandomly();
+       // Debug.Log(" UPDATE ----------\n PlayerPos: " + playerPos + " TargetPos: " + targetPos);
+
     }
 
     void seek(string tag, string mate)
     {
+
         Collider2D[] colliders = Physics2D.OverlapBoxAll(self.transform.position, transform.localScale * 4, 360);
 
         if (colliders.Length > 1)
         {
-            for(int i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
-               // Debug.Log(self.gameObject.name + " COLLIDERS: \n" + colliders[i].gameObject.name);
-                if(mate != null && colliders[i].tag == mate)
+                if (mate != null && colliders[i].tag == mate)
                 {
                     foundTarget = true;
                     target = colliders[i];
@@ -80,16 +79,15 @@ public class Player : MonoBehaviour {
             }
             if (foundTarget)
             {
-               // Debug.Log(self.gameObject.name + "    Go towards: " + target.gameObject.name);
-                moveTowards(target);
-                breed(target.gameObject);
+                Debug.Log("hi");
+                if (target.tag == mate) { Debug.Log("mate"); breed(target.gameObject); }
+                else { moveTowards(target); }
             }
             else
             {
-                // Debug.Log(self.gameObject.name + "    Move Randomly");
                 moveRandomly();
             }
-            foundTarget= false;
+            foundTarget = false;
         }
         else
         {
@@ -100,99 +98,78 @@ public class Player : MonoBehaviour {
 
     void moveTowards(Collider2D col)
     {
-        targetPos = col.transform.position;
-        if (playerPos.x < col.transform.position.x)
+        if(!coRun)
         {
-            targetPos.x++;
+            if (Mathf.Round(transform.position.x) < col.transform.position.x) { targetPos.x++; }
+            else if (Mathf.Round(transform.position.x) > col.transform.position.x) { targetPos.x--; }
+            else if (Mathf.Round(transform.position.y) < col.transform.position.y) { targetPos.y++; }
+            else if (Mathf.Round(transform.position.y) > col.transform.position.y) { targetPos.y--; }
+            Debug.Log(targetPos);
         }
-        else if (playerPos.x > col.transform.position.x)
-        {
-            targetPos.x--;
-        }
-        else if (playerPos.y < col.transform.position.y)
-        {
-            targetPos.y++;
-        }
-        else if (playerPos.y > col.transform.position.y)
-        {
-            targetPos.y--;
-            
-        }
-        Debug.Log(gameObject.name + ": MOVE TOWARDS");
-        StartCoroutine(move(targetPos));
+        
+        StartCoroutine(move());
+        
     }
 
     void moveRandomly()
-    {
-        targetPos = playerPos;
-
-        int rand = Random.Range(0, 100);
-        if (rand > 70)
+    {       
+        if (!coRun)
         {
-            direction = Random.Range(0, 4);
+            if(Time.time > moveTime)
+            {
+                int rand = Random.Range(0, 100);
+                if(rand > 70)
+                {
+                    genRandomDirection();
+                    
+                }
+                moveTime += Time.deltaTime;
+            }
+            playerPos = targetPos;
+            if (direction == 0 && playerPos.x < (map.size.x / 2)-1) { targetPos.x++; }
+            else if (direction == 1 && playerPos.x > (-map.size.x / 2)-1) { targetPos.x--; }
+            else if (direction == 2 && playerPos.y <= (map.size.y / 2)-2) { targetPos.y++; }
+            else if (direction == 3 && playerPos.y >= (map.size.y / 2)-2) { targetPos.y--; }
+            checkIfOnEdge();
         }
-        
 
-        switch (direction)
-        {
-            case 0:
-                if (playerPos.x < (map.size.x / 2) - 1)
-                {
-                    targetPos.x++;
-                }
-                break;
-            case 1:
-                if (playerPos.x > (-map.size.x / 2))
-                {
-                    targetPos.x--;
-                }
-                break;
-            case 2:
-                if (playerPos.y < (map.size.y / 2) - 1)
-                {
-                    targetPos.y++;
-                }
-                break;
-            case 3:
-                if (playerPos.y > (-map.size.y / 2))
-                {
-                    targetPos.y--;
-                }
-                break;
-        }
-        Debug.Log(gameObject.name + ": MOVE RANDOMLY");
-
-
-        StartCoroutine(move(targetPos));
+        StartCoroutine(move());
 
     }
 
-    IEnumerator move(Vector3 targetPos)
+    IEnumerator move()
     {
-        transform.position = Vector3.MoveTowards(playerPos, targetPos, 1 * Time.deltaTime);
-        
-        yield return null;
+        coRun = true;
+        while (Vector3.Distance(transform.position, targetPos) > 0.1f)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, 1f * Time.deltaTime);
+            yield return null;
+        }
+        StopAllCoroutines();
+        coRun = false;
+    }
+
+    int genRandomDirection()
+    {
+       // Debug.Log("DIRECTION: " + direction);
+        direction = Random.Range(0, 4);
+        return direction;
+    }
+
+    void checkIfOnEdge()
+    {
+        if (playerPos.x == (map.size.x / 2)-1) { direction = 1; }
+        else if (playerPos.x == (-map.size.x / 2)-1) { direction = 0; }
+        else if (playerPos.y == (map.size.y / 2)-2) { direction = 3; }
+        else if (playerPos.y == (-map.size.y / 2)-2) { direction = 2; }
     }
 
     void moveByKey()
     {
-        if (Input.GetKeyDown("w"))
-        {
-            playerPos.y += 1;
-
-        }
-        else if (Input.GetKeyDown("s"))
-        {
-            playerPos.y -= 1;
-        }
-        else if (Input.GetKeyDown("a"))
-        {
-            playerPos.x -= 1;
-        }
-        else if (Input.GetKeyDown("d"))
-        {
-            playerPos.x += 1;
-        }
+        if (Input.GetKeyDown("w")) { playerPos.y += 1; }
+        else if (Input.GetKeyDown("s")) { playerPos.y -= 1; }
+        else if (Input.GetKeyDown("a")) { playerPos.x -= 1; }
+        else if (Input.GetKeyDown("d")) { playerPos.x += 1; }
         self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
     }
 
@@ -211,11 +188,13 @@ public class Player : MonoBehaviour {
     /// <param name="partner"></param>
     void breed(GameObject partner)
     {
-        if(playerPos == partner.transform.position)
-        {        
-          //  this.GetComponent<BunnyTraits>().foodLevel -= 50;
-          //  partner.GetComponent<BunnyTraits>().foodLevel -= 50;
-            
+        Debug.Log(Vector3.Distance(transform.position, partner.transform.position));
+        if(Vector3.Distance(transform.position, partner.transform.position) < 1f)
+        {
+            Debug.Log("Breeding");
+            gameObject.GetComponent<BunnyTraits>().foodLevel -= 50;
+            partner.GetComponent<BunnyTraits>().foodLevel -= 50;
+            spawn.spawnBunny();
         }
     }
 

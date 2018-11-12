@@ -22,7 +22,7 @@ public class BunnyTraits : MonoBehaviour
         {
             self.name = name;
         }
-        foodLevel = 70;
+        foodLevel = 90;
     }
 
     // Update is called once per frame
@@ -48,6 +48,10 @@ public class BunnyTraits : MonoBehaviour
             {
                 self.gameObject.tag = "female";
             }
+        }
+        else
+        {
+            self.gameObject.tag = "Untagged";
         }
     }
 

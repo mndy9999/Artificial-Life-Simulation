@@ -10,7 +10,7 @@ public class RandomSpawn : MonoBehaviour {
     public Tilemap spawnArea;
     public Tile bushTile;
     public GameObject bushGO;
-    public GameObject bunnyGO;
+    public GameObject[] bunnyGO;
 
     public List <Tile> grassArr;
 
@@ -21,7 +21,7 @@ public class RandomSpawn : MonoBehaviour {
 	void Start () {
         time = 0;
         grassArr = new List<Tile>();
-    
+        spawnArea = Component.FindObjectOfType<Tilemap>();
         for(int i = 0; i < numberOfBunnies; i++)
         {
             spawnBunny();
@@ -40,10 +40,12 @@ public class RandomSpawn : MonoBehaviour {
         
     }
 
-    void spawnBunny()
+    public void spawnBunny()
     {
         v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
-        Instantiate(bunnyGO, v, Quaternion.identity);
+        Instantiate(bunnyGO[0], v, Quaternion.identity);
+        v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
+        Instantiate(bunnyGO[1], v, Quaternion.identity);
     }
 
     void spawnBush()
