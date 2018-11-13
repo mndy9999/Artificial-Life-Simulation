@@ -62,11 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BunnyTraits.cs" />
-    <Compile Include="Assets\Scripts\Fitness.cs" />
+    <Compile Include="Assets\Scripts\Genetic Algorithm\Fitness.cs" />
+    <Compile Include="Assets\Scripts\Genetic Algorithm\Population.cs" />
+    <Compile Include="Assets\Scripts\Genetic Algorithm\Selection.cs" />
     <Compile Include="Assets\Scripts\GridDraw.cs" />
     <Compile Include="Assets\Scripts\PanelTextUpdate.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\Population.cs" />
     <Compile Include="Assets\Scripts\RandomSpawn.cs" />
     <Compile Include="Assets\Scripts\TileCheck.cs" />
     <None Include="Assets\Shaders\$self_illuminated_outlined_diffuse_113.shader" />

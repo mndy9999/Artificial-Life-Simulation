@@ -30,6 +30,7 @@ public class BunnyTraits : MonoBehaviour
         speed = 3;
         sigth = 10;
         collectScore = 0;
+
         initializationTime = (int)Time.realtimeSinceStartup;
         bunniesParent = GameObject.Find("Bunnies");
     }
@@ -40,7 +41,6 @@ public class BunnyTraits : MonoBehaviour
         setTag();
         ageUp();
         checkIfDead();
-
     }
 
     void calculateFitness()

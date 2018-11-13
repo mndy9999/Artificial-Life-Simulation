@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        playerPos = self.transform.position;
+        playerPos = transform.position;
         targetPos = playerPos;
         moveTime = 0;
         map = Component.FindObjectOfType<Tilemap>();
@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
         target = null;
         coRun = false;
 
+        spawn = GameObject.Find("EventSystem").GetComponent<RandomSpawn>();
     }
 
     // Update is called once per frame
@@ -41,9 +42,9 @@ public class Player : MonoBehaviour {
     {
         playerPos = transform.position;
 
-        if (self.GetComponent<BunnyTraits>().canMate())
+        if (transform.GetComponent<BunnyTraits>().canMate())
         {
-            if (self.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
+            if (transform.GetComponent<BunnyTraits>().gender == BunnyTraits.Gender.male) { seek("bush", "female"); }
             else { seek("bush", "male"); }
         }
         else
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour {
     void seek(string tag, string mate)
     {
 
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(self.transform.position, transform.localScale * 4, 360);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale * 4, 360);
 
         if (colliders.Length > 1)
         {
@@ -113,14 +114,10 @@ public class Player : MonoBehaviour {
     {       
         if (!coRun)
         {
-            if(Time.time > moveTime)
+            if (Time.time > moveTime)
             {
                 int rand = Random.Range(0, 100);
-                if(rand > 70)
-                {
-                    genRandomDirection();
-                    
-                }
+                if (rand > 70) { genRandomDirection(); }
                 moveTime += Time.deltaTime;
             }
             playerPos = targetPos;
@@ -128,7 +125,6 @@ public class Player : MonoBehaviour {
             else if(direction == 1 && playerPos.x > (-map.size.x / 2)) { targetPos.x--; }
             else if(direction == 2 && playerPos.y < (map.size.y / 2)-1) { targetPos.y++; }
             else if(direction == 3 && playerPos.y > (-map.size.y / 2)) { targetPos.y--; }
-            else { Debug.Log("Wrong direction??" + direction); }
             checkIfOnEdge();
         }
 
@@ -169,7 +165,7 @@ public class Player : MonoBehaviour {
         else if (Input.GetKeyDown("s")) { playerPos.y -= 1; }
         else if (Input.GetKeyDown("a")) { playerPos.x -= 1; }
         else if (Input.GetKeyDown("d")) { playerPos.x += 1; }
-        self.transform.SetPositionAndRotation(playerPos, Quaternion.identity);
+        transform.SetPositionAndRotation(playerPos, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
