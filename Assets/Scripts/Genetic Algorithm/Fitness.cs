@@ -34,7 +34,6 @@ public class Fitness : MonoBehaviour {
 
     void calculateFitness()
     {
-        Debug.Log("Calulating Fitness....");
         for(int i = 0; i < bunnyParent.transform.childCount; i++)
         {
             fitness[i] = (speed[i] + sigth[i] + collect[i]) / 3;

@@ -37,15 +37,34 @@ public class RandomSpawn : MonoBehaviour {
         
     }
 
-    public void spawnBunny()
+    public void spawnBunny(string gender, GameObject bunny)
     {
-        v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
-        bunny = Instantiate(bunnyGO[0], v, Quaternion.identity, Bunnies.transform);
-        bunny.name = "Offspring" + Bunnies.transform.childCount;
+        if (gender == "female")
+        {
+            v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
+            bunny = Instantiate(bunnyGO[0], v, Quaternion.identity, Bunnies.transform);
+            bunny.name = "Offspring" + Bunnies.transform.childCount;
+        }
+        else if (gender == "male")
+        {
+            v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
+            bunny = Instantiate(bunnyGO[1], v, Quaternion.identity, Bunnies.transform);
+            bunny.name = "Offspring" + Bunnies.transform.childCount;
+        }
+        else if(gender == "both")
+        {
+            v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
+            bunny = Instantiate(bunnyGO[0], v, Quaternion.identity, Bunnies.transform);
+            bunny.name = "Offspring" + Bunnies.transform.childCount;
 
-        v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
-        bunny = Instantiate(bunnyGO[1], v, Quaternion.identity, Bunnies.transform);
-        bunny.name = "Offspring" + Bunnies.transform.childCount;
+            v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
+            bunny = Instantiate(bunnyGO[1], v, Quaternion.identity, Bunnies.transform);
+            bunny.name = "Offspring" + Bunnies.transform.childCount;
+        }
+        else
+        {
+            Debug.Log("Wrong gender entered!!");
+        }
     }
 
     void spawnBush()

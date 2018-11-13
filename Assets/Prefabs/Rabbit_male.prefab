@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114857067926942962}
   m_Layer: 0
   m_Name: Rabbit_male
-  m_TagString: Untagged
+  m_TagString: male
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,15 +115,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a388b6cef5211b14b83f5fd741515bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 1442075992498998}
   name: 
-  gender: 0
-  foodLevel: 0
-  sigth: 0
   age: 0
-  fitness: 0
+  gender: 0
   speed: 0
+  sigth: 0
   collectScore: 0
+  foodLevel: 0
+  fitness: 0
 --- !u!212 &212262732951990886
 SpriteRenderer:
   m_ObjectHideFlags: 1

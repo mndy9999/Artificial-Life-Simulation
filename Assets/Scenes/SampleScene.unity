@@ -162,6 +162,10 @@ Prefab:
       propertyPath: spawn
       value: 
       objectReference: {fileID: 952662873}
+    - target: {fileID: 1442075992498998, guid: ef39906aa58a58f47b139c9a614332de, type: 2}
+      propertyPath: m_TagString
+      value: male
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef39906aa58a58f47b139c9a614332de, type: 2}
   m_IsPrefabAsset: 0
@@ -7070,6 +7074,8 @@ GameObject:
   - component: {fileID: 1391332800}
   - component: {fileID: 1391332799}
   - component: {fileID: 1391332801}
+  - component: {fileID: 1391332802}
+  - component: {fileID: 1391332803}
   m_Layer: 0
   m_Name: GeneticAlgorithm
   m_TagString: Untagged
@@ -7114,6 +7120,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fb33e965230dd249855d70e161de4e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1391332802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1391332798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93dee1a721eb3bd489ae37a710bb2903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeUntilNextSelection: 3
+--- !u!114 &1391332803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1391332798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fc96d687ddabe408b926d1b6d41e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1402781856
@@ -7242,6 +7271,10 @@ Prefab:
       propertyPath: spawn
       value: 
       objectReference: {fileID: 952662873}
+    - target: {fileID: 1336312142593070, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
+      propertyPath: m_TagString
+      value: female
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
   m_IsPrefabAsset: 0

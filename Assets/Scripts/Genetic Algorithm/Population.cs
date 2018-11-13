@@ -14,20 +14,15 @@ public class Population : MonoBehaviour {
 
     GameObject fittest;
 
+
+
     private void Start()
     {
+
         spawnArea = Component.FindObjectOfType<Tilemap>();
         bunnyParent = GameObject.FindGameObjectWithTag("Bunny Parent");
         createInitialPopulation();
     }
-
-
-
-    private void Update()
-    {
-        Debug.Log("FITTEST: " + getFittest().name + ": " + getFittest().GetComponent<BunnyTraits>().fitness);
-    }
-
 
 
     void createInitialPopulation()

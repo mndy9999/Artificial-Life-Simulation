@@ -142,6 +142,7 @@ public class Player : MonoBehaviour {
         }
         StopAllCoroutines();
         coRun = false;
+        transform.GetComponent<BunnyTraits>().foodLevel -= 1;
     }
 
     int genRandomDirection()
@@ -183,9 +184,9 @@ public class Player : MonoBehaviour {
         transform.position = Vector3.Lerp(transform.position, partner.transform.position, 1 * Time.deltaTime);
         if(Vector3.Distance(transform.position, partner.transform.position) < 1f)
         {
-            gameObject.GetComponent<BunnyTraits>().foodLevel -= 50;
-            partner.GetComponent<BunnyTraits>().foodLevel -= 50;
-            spawn.spawnBunny();
+            gameObject.GetComponent<BunnyTraits>().foodLevel -= 10;
+            partner.GetComponent<BunnyTraits>().foodLevel -= 10;
+            spawn.spawnBunny("both", null);
         }
     }
 

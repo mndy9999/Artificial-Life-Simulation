@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class BunnyTraits : MonoBehaviour
 {
-    public GameObject self;
     public string name;
+    public int age;
+
     public enum Gender { male, female }
     public Gender gender;
-    public int foodLevel;
-    public float sigth;
-    public int age;
-    public float fitness;
+
     public int speed;
+    public float sigth;  
     public int collectScore;
+    public int foodLevel;
+
+    public float fitness;
 
     int initializationTime;
     GameObject fittest;
@@ -23,35 +25,23 @@ public class BunnyTraits : MonoBehaviour
     {
         if (name != "")
         {
-            self.name = name;
+            transform.name = name;
         }
-        foodLevel = 90;
+        
         age = 0;
-        speed = 3;
-        sigth = 10;
+        foodLevel = 50;
         collectScore = 0;
-
+        genRandomTraits();
         initializationTime = (int)Time.realtimeSinceStartup;
-        bunniesParent = GameObject.Find("Bunnies");
     }
 
     // Update is called once per frame
     void Update()
     {
-        setTag();
         ageUp();
         checkIfDead();
     }
 
-    void calculateFitness()
-    {
-        fitness = (foodLevel + sigth + speed) / 3;
-    }
-
-    float getFitness()
-    {
-        return fitness;
-    }
 
     void ageUp()
     {
@@ -60,7 +50,7 @@ public class BunnyTraits : MonoBehaviour
 
     void checkIfDead()
     {
-        if(age > 70)
+        if(age > 100 || foodLevel<=0)
         {
             Destroy(gameObject);
         }
@@ -68,40 +58,16 @@ public class BunnyTraits : MonoBehaviour
 
     public bool canMate()
     {
-        return foodLevel > 70;
+        return foodLevel > 50;
     }
 
-    void setTag()
+    void genRandomTraits()
     {
-        if (foodLevel > 70)
-        {
-            if (gender == Gender.male)
-            {
-                self.gameObject.tag = "male";
-            }
-            else
-            {
-                self.gameObject.tag = "female";
-            }
-        }
-        else
-        {
-            self.gameObject.tag = "Untagged";
-        }
-    }
+        int rand = Random.Range(1, 4);
+        speed = rand;
+        rand = Random.Range(2, 6);
+        sigth = rand;
 
-    GameObject getFittest()
-    {
-        float highestFitness = 0;
-        for(int i = 0; i < bunniesParent.transform.childCount; i++)
-        {
-            if(bunniesParent.transform.GetChild(i).GetComponent<BunnyTraits>().getFitness() > highestFitness)//fittest.GetComponent<BunnyTraits>().getFitness())
-            {
-                highestFitness = bunniesParent.transform.GetChild(i).GetComponent<BunnyTraits>().getFitness();
-                fittest = bunniesParent.transform.GetChild(i).gameObject;
-            }
-        }
-        return fittest;
     }
 
 }
