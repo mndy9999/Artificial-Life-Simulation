@@ -11,6 +11,8 @@ public class RandomSpawn : MonoBehaviour {
     public Tile bushTile;
     public GameObject bushGO;
     public GameObject[] bunnyGO;
+    public GameObject bunny;
+    public GameObject Bunnies;
 
     public List <Tile> grassArr;
 
@@ -26,7 +28,6 @@ public class RandomSpawn : MonoBehaviour {
         {
             spawnBunny();
         }
-
     }
 	
 	// Update is called once per frame
@@ -43,9 +44,11 @@ public class RandomSpawn : MonoBehaviour {
     public void spawnBunny()
     {
         v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
-        Instantiate(bunnyGO[0], v, Quaternion.identity);
+        bunny = Instantiate(bunnyGO[0], v, Quaternion.identity, Bunnies.transform);
+        bunny.name = "Offspring" + Bunnies.transform.childCount;
         v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
-        Instantiate(bunnyGO[1], v, Quaternion.identity);
+        bunny = Instantiate(bunnyGO[1], v, Quaternion.identity, Bunnies.transform);
+        bunny.name = "Offspring" + Bunnies.transform.childCount;
     }
 
     void spawnBush()

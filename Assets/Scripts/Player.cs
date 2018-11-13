@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
         foundTarget = false;
         target = null;
         coRun = false;
-        Debug.Log(map.size);
+
     }
 
     // Update is called once per frame
@@ -79,8 +79,7 @@ public class Player : MonoBehaviour {
             }
             if (foundTarget)
             {
-                Debug.Log("hi");
-                if (target.tag == mate) { Debug.Log("mate"); breed(target.gameObject); }
+                if (target.tag == mate) { breed(target.gameObject); }
                 else { moveTowards(target); }
             }
             else
@@ -104,7 +103,6 @@ public class Player : MonoBehaviour {
             else if (Mathf.Round(transform.position.x) > col.transform.position.x) { targetPos.x--; }
             else if (Mathf.Round(transform.position.y) < col.transform.position.y) { targetPos.y++; }
             else if (Mathf.Round(transform.position.y) > col.transform.position.y) { targetPos.y--; }
-            Debug.Log(targetPos);
         }
         
         StartCoroutine(move());
@@ -127,9 +125,10 @@ public class Player : MonoBehaviour {
             }
             playerPos = targetPos;
             if (direction == 0 && playerPos.x < (map.size.x / 2)-1) { targetPos.x++; }
-            else if (direction == 1 && playerPos.x > (-map.size.x / 2)-1) { targetPos.x--; }
-            else if (direction == 2 && playerPos.y <= (map.size.y / 2)-2) { targetPos.y++; }
-            else if (direction == 3 && playerPos.y >= (map.size.y / 2)-2) { targetPos.y--; }
+            else if(direction == 1 && playerPos.x > (-map.size.x / 2)) { targetPos.x--; }
+            else if(direction == 2 && playerPos.y < (map.size.y / 2)-1) { targetPos.y++; }
+            else if(direction == 3 && playerPos.y > (-map.size.y / 2)) { targetPos.y--; }
+            else { Debug.Log("Wrong direction??" + direction); }
             checkIfOnEdge();
         }
 
@@ -159,9 +158,9 @@ public class Player : MonoBehaviour {
     void checkIfOnEdge()
     {
         if (playerPos.x == (map.size.x / 2)-1) { direction = 1; }
-        else if (playerPos.x == (-map.size.x / 2)-1) { direction = 0; }
-        else if (playerPos.y == (map.size.y / 2)-2) { direction = 3; }
-        else if (playerPos.y == (-map.size.y / 2)-2) { direction = 2; }
+        else if (playerPos.x == (-map.size.x / 2)) { direction = 0; }
+        else if (playerPos.y == (map.size.y / 2)-1) { direction = 3; }
+        else if (playerPos.y == (-map.size.y / 2)) { direction = 2; }
     }
 
     void moveByKey()
@@ -179,6 +178,7 @@ public class Player : MonoBehaviour {
         {
             Object.Destroy(collision.gameObject);
             self.GetComponent<BunnyTraits>().foodLevel += 10;
+            self.GetComponent<BunnyTraits>().collectScore++;
         }
     }
 

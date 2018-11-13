@@ -6,18 +6,18 @@ public class BunnyTraits : MonoBehaviour
 {
     public GameObject self;
     public string name;
-    public enum Gender
-    {
-        male,
-        female
-    }
+    public enum Gender { male, female }
     public Gender gender;
     public int foodLevel;
     public float sigth;
     public int age;
+    public float fitness;
+    public int speed;
+    public int collectScore;
 
     int initializationTime;
-
+    GameObject fittest;
+    GameObject bunniesParent;
     // Use this for initialization
     void Start()
     {
@@ -27,9 +27,11 @@ public class BunnyTraits : MonoBehaviour
         }
         foodLevel = 90;
         age = 0;
-
+        speed = 3;
+        sigth = 10;
+        collectScore = 0;
         initializationTime = (int)Time.realtimeSinceStartup;
-        Debug.Log("TIME: " + initializationTime);
+        bunniesParent = GameObject.Find("Bunnies");
     }
 
     // Update is called once per frame
@@ -38,6 +40,17 @@ public class BunnyTraits : MonoBehaviour
         setTag();
         ageUp();
         checkIfDead();
+
+    }
+
+    void calculateFitness()
+    {
+        fitness = (foodLevel + sigth + speed) / 3;
+    }
+
+    float getFitness()
+    {
+        return fitness;
     }
 
     void ageUp()
@@ -47,7 +60,7 @@ public class BunnyTraits : MonoBehaviour
 
     void checkIfDead()
     {
-        if(age > 50)
+        if(age > 70)
         {
             Destroy(gameObject);
         }
@@ -77,8 +90,18 @@ public class BunnyTraits : MonoBehaviour
         }
     }
 
-
-
-
+    GameObject getFittest()
+    {
+        float highestFitness = 0;
+        for(int i = 0; i < bunniesParent.transform.childCount; i++)
+        {
+            if(bunniesParent.transform.GetChild(i).GetComponent<BunnyTraits>().getFitness() > highestFitness)//fittest.GetComponent<BunnyTraits>().getFitness())
+            {
+                highestFitness = bunniesParent.transform.GetChild(i).GetComponent<BunnyTraits>().getFitness();
+                fittest = bunniesParent.transform.GetChild(i).gameObject;
+            }
+        }
+        return fittest;
+    }
 
 }
