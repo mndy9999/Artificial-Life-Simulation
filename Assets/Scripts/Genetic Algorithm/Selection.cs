@@ -6,8 +6,8 @@ using UnityEngine;
 public class Selection : MonoBehaviour {
 
     GameObject bunnyParent;
-    GameObject male;
-    GameObject female;
+    public GameObject male;
+    public GameObject female;
 
     List<GameObject> maleBunny;
     List<GameObject> femaleBunny;
@@ -30,12 +30,10 @@ public class Selection : MonoBehaviour {
             calculateSum();
             selectMale();
             selectFemale();
-            Debug.Log("Male Selected: " + male.name + "  Female Selected: " + female.name);
             time = 0;
         }
 
-        male = null;
-        female = null;
+        
     }
 
     void calculateSum()
@@ -50,6 +48,7 @@ public class Selection : MonoBehaviour {
 
     GameObject select()
     {
+
         float rand = Random.Range(0, sum);
         float s = 0;
 
@@ -77,6 +76,7 @@ public class Selection : MonoBehaviour {
 
     void selectFemale()
     {
+
         if (GameObject.FindGameObjectsWithTag("female").Length != 0)
         {
             while (!female)

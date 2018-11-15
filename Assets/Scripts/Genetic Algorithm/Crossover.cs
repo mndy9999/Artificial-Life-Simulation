@@ -8,13 +8,15 @@ public class Crossover : MonoBehaviour {
     GameObject female;
     GameObject offspring;
 
+    GameObject eventSystem;
+
     float time = 0;
     float timeUntilNextSelection = 3.1f;
 
     private void Start()
     {
-        male = GetComponent<Selection>().getMale();
-        female = GetComponent<Selection>().getFemale();
+        eventSystem = GameObject.Find("EventSystem");
+            
     }
 
     private void Update()
@@ -22,11 +24,14 @@ public class Crossover : MonoBehaviour {
         time += Time.deltaTime;
         if (time > timeUntilNextSelection)
         {
-           // cross();
+            male = gameObject.GetComponent<Selection>().male;
+            female = gameObject.GetComponent<Selection>().female;
             createOffSpring();
-            Debug.Log("Crossover");
             time = 0;
+            
         }
+        
+        
     }
 
     void cross()
@@ -51,12 +56,12 @@ public class Crossover : MonoBehaviour {
         int rand = Random.Range(0, 2);
         if (rand == 0)
         {
-            GetComponent<RandomSpawn>().spawnBunny("male", offspring);
+            offspring = eventSystem.GetComponent<RandomSpawn>().spawnBunny("male");
             
         }
-        else{
-            GetComponent<RandomSpawn>().spawnBunny("female", offspring);
+        else if(rand == 1){
+            offspring = eventSystem.GetComponent<RandomSpawn>().spawnBunny("female");
         }
-        cross();
+        if (offspring) { cross(); }
     }
 }

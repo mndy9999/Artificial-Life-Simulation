@@ -51,15 +51,14 @@ public class Player : MonoBehaviour {
         {
             seek("bush", "null");
         }
-        //moveRandomly();
-       // Debug.Log(" UPDATE ----------\n PlayerPos: " + playerPos + " TargetPos: " + targetPos);
+
 
     }
 
     void seek(string tag, string mate)
     {
 
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale * 4, 360);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale * gameObject.GetComponent<BunnyTraits>().sigth, 360);
 
         if (colliders.Length > 1)
         {
@@ -142,7 +141,7 @@ public class Player : MonoBehaviour {
         }
         StopAllCoroutines();
         coRun = false;
-        transform.GetComponent<BunnyTraits>().foodLevel -= 1;
+        transform.GetComponent<BunnyTraits>().foodLevel -= 0.5f;
     }
 
     int genRandomDirection()
@@ -186,7 +185,7 @@ public class Player : MonoBehaviour {
         {
             gameObject.GetComponent<BunnyTraits>().foodLevel -= 10;
             partner.GetComponent<BunnyTraits>().foodLevel -= 10;
-            spawn.spawnBunny("both", null);
+            spawn.spawnBunny("both");
         }
     }
 
@@ -209,6 +208,6 @@ public class Player : MonoBehaviour {
         //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
         if (m_started)
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-            Gizmos.DrawWireCube(transform.position, transform.localScale * 4);
+            Gizmos.DrawWireCube(transform.position, transform.localScale * gameObject.GetComponent<BunnyTraits>().sigth);
     }
 }

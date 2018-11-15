@@ -13,7 +13,7 @@ public class BunnyTraits : MonoBehaviour
     public int speed;
     public float sigth;  
     public int collectScore;
-    public int foodLevel;
+    public float foodLevel;
 
     public float fitness;
 
@@ -27,7 +27,6 @@ public class BunnyTraits : MonoBehaviour
         {
             transform.name = name;
         }
-        
         age = 0;
         foodLevel = 50;
         collectScore = 0;
