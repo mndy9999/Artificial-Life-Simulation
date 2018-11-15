@@ -10,10 +10,11 @@ public class BunnyTraits : MonoBehaviour
     public enum Gender { male, female }
     public Gender gender;
 
-    public int speed;
-    public float sigth;  
-    public int collectScore;
-    public float foodLevel;
+    public int speed = 0;
+    public float sigth = 0;  
+    public int collect = 0;
+    public float foodLevel = 0;
+    public float health = 0;
 
     public float fitness;
 
@@ -27,11 +28,13 @@ public class BunnyTraits : MonoBehaviour
         {
             transform.name = name;
         }
+        fitness = 0;
         age = 0;
         foodLevel = 50;
-        collectScore = 0;
-        genRandomTraits();
+        collect = 0;
         initializationTime = (int)Time.realtimeSinceStartup;
+        genRandomTraits();
+               
     }
 
     // Update is called once per frame
@@ -66,6 +69,8 @@ public class BunnyTraits : MonoBehaviour
         speed = rand;
         rand = Random.Range(2, 6);
         sigth = rand;
+        rand = Random.Range(0, 3);
+        health = rand;
 
     }
 

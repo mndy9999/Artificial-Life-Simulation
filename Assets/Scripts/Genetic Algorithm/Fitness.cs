@@ -25,7 +25,7 @@ public class Fitness : MonoBehaviour {
         {
             speed[i] = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().speed;
             sigth[i] = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().sigth;
-            collect[i] = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().collectScore;
+            collect[i] = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().collect;
             fitness[i] = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness;
 
         }

@@ -174,7 +174,7 @@ public class Player : MonoBehaviour {
         {
             Object.Destroy(collision.gameObject);
             self.GetComponent<BunnyTraits>().foodLevel += 10;
-            self.GetComponent<BunnyTraits>().collectScore++;
+            self.GetComponent<BunnyTraits>().collect++;
         }
     }
 

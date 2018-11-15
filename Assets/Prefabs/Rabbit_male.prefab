@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4441074702808608}
   - component: {fileID: 212262732951990886}
-  - component: {fileID: 114114786736621296}
   - component: {fileID: 50055944538495484}
   - component: {fileID: 61413457420516464}
   - component: {fileID: 114857067926942962}
@@ -89,21 +88,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
---- !u!114 &114114786736621296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442075992498998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d22c9667d542f394cb214704c11a68f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  self: {fileID: 1442075992498998}
-  speed: 9
-  map: {fileID: 0}
-  spawn: {fileID: 0}
 --- !u!114 &114857067926942962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,8 +104,9 @@ MonoBehaviour:
   gender: 0
   speed: 0
   sigth: 0
-  collectScore: 0
+  collect: 0
   foodLevel: 0
+  health: 0
   fitness: 0
 --- !u!212 &212262732951990886
 SpriteRenderer:

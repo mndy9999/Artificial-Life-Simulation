@@ -62,6 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BunnyTraits.cs" />
+    <Compile Include="Assets\Scripts\FoxTraits.cs" />
+    <Compile Include="Assets\Scripts\GA_Crossover.cs" />
+    <Compile Include="Assets\Scripts\GA_Fitness.cs" />
+    <Compile Include="Assets\Scripts\GA_Population.cs" />
+    <Compile Include="Assets\Scripts\GA_Selection.cs" />
     <Compile Include="Assets\Scripts\Genetic Algorithm\Crossover.cs" />
     <Compile Include="Assets\Scripts\Genetic Algorithm\Fitness.cs" />
     <Compile Include="Assets\Scripts\Genetic Algorithm\Population.cs" />

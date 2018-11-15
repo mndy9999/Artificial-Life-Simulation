@@ -21,7 +21,7 @@ public class Crossover : MonoBehaviour {
 
     private void Update()
     {
-        time += Time.deltaTime;
+             time += Time.deltaTime;
         if (time > timeUntilNextSelection)
         {
             male = gameObject.GetComponent<Selection>().male;

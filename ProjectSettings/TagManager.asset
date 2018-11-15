@@ -8,6 +8,7 @@ TagManager:
   - male
   - female
   - Bunny Parent
+  - Fox Parent
   layers:
   - Default
   - TransparentFX
