@@ -71,6 +71,7 @@ public class GA_Population : MonoBehaviour {
                 bunnyGO = Instantiate(bunnyArr[rand], pos, Quaternion.identity, bunnyParent.transform);
                 bunnyGO.name = "Bunny" + bunnyParent.transform.childCount;
             }
+            return bunnyGO;
         }
         else if (indiv == "fox")
         {
@@ -86,7 +87,7 @@ public class GA_Population : MonoBehaviour {
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 foxGO = Instantiate(foxArr[1], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = "Bunny" + foxParent.transform.childCount;
+                foxGO.name = "Fox" + foxParent.transform.childCount;
             }
             else if (gender == "random")
             {
@@ -95,8 +96,9 @@ public class GA_Population : MonoBehaviour {
                 foxGO = Instantiate(foxArr[rand], pos, Quaternion.identity, foxParent.transform);
                 foxGO.name = "Fox" + foxParent.transform.childCount;
             }
+            return foxGO;
         }
-        return bunnyGO;
+        return null;
     }
 
     GameObject getFittest(string indiv, string gender)

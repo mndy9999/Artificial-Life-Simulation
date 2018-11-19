@@ -65,7 +65,6 @@ public class GA_Crossover : MonoBehaviour {
             newFoxObject = population.genIndividual("fox", "random");
             int random;
 
-
             random = Random.Range(0, 2);
             if (random == 0) { newFoxObject.GetComponent<FoxTraits>().speed = selectedMaleFox.GetComponent<FoxTraits>().speed; }
             else if (random == 1) { newFoxObject.GetComponent<FoxTraits>().speed = selectedFemaleFox.GetComponent<FoxTraits>().speed; }
