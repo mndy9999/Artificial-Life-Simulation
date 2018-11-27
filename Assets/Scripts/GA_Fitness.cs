@@ -7,11 +7,8 @@ public class GA_Fitness : MonoBehaviour {
     GameObject bunnyParent;
     GameObject foxParent;
 
-    GameObject bunnyGO;
-    GameObject foxGO;
+    GA_Traits traits;
 
-    BunnyTraits bunnyTraits;
-    FoxTraits foxTraits;
 
     private void Start()
     {
@@ -26,16 +23,15 @@ public class GA_Fitness : MonoBehaviour {
 
     void calculateFitness()
     {
-        for(int i=0; i < bunnyParent.transform.childCount; i++)
+        for(int i=0; i < (bunnyParent.transform.childCount); i++)
         {
-            bunnyTraits = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>();
-            bunnyTraits.fitness = (bunnyTraits.speed + bunnyTraits.sigth + bunnyTraits.collect) / 3;
+            traits = bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>();
+            traits.fitness = (traits.speed + traits.sight + traits.collect + traits.spec) / 4;
         }
-        for(int i = 0; i < foxParent.transform.childCount; i++)
+        for (int i = 0; i < (foxParent.transform.childCount); i++)
         {
-            
-            foxTraits = foxParent.transform.GetChild(i).GetComponent<FoxTraits>();
-            foxTraits.fitness = (foxTraits.speed + foxTraits.sight + foxTraits.collect) / 3;
+            traits = foxParent.transform.GetChild(i).GetComponent<GA_Traits>();
+            traits.fitness = (traits.speed + traits.sight + traits.collect + traits.spec) / 4;
         }
     }
 }

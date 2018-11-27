@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GA_Crossover : MonoBehaviour {
-
-
+public class GA_Crossover : MonoBehaviour
+{
     GA_Population population;
 
     GameObject selectedMaleBunny;
@@ -14,14 +13,15 @@ public class GA_Crossover : MonoBehaviour {
 
     GameObject newBunnyObject;
     GameObject newFoxObject;
+    GameObject newObj;
 
-    float time = 0;
-    float timeUntilNextSelection = 3;
+    float time = 3;
+    public int mutationRate = 30;
 
     private void Start()
     {
         population = gameObject.GetComponent<GA_Population>();
-
+        mutationRate = 30;
     }
 
     private void Update()
@@ -31,33 +31,39 @@ public class GA_Crossover : MonoBehaviour {
         selectedMaleFox = gameObject.GetComponent<GA_Selection>().selectedMaleFox;
         selectedFemaleFox = gameObject.GetComponent<GA_Selection>().selectedFemaleFox;
 
-        time += Time.deltaTime;
-        if (time > timeUntilNextSelection)
+        time -= Time.deltaTime;
+        if (time <= 0)
         {
-            if (selectedMaleBunny && selectedFemaleBunny) { cross("bunny"); }
-            if (selectedMaleFox && selectedFemaleFox) { cross("fox"); }
-            timeUntilNextSelection += time;
+            if (selectedMaleBunny && selectedFemaleBunny) { crossover("bunny"); }
+            if (selectedMaleFox && selectedFemaleFox) { crossover("fox"); }
+            time += 3;
         }
     }
 
     void cross(string indiv)
     {
-        if(indiv == "bunny")
+        if (indiv == "bunny")
         {
             newBunnyObject = population.genIndividual("bunny", "random");
             int random;
 
-            random = Random.Range(0, 2);
-            if (random == 0) { newBunnyObject.GetComponent<BunnyTraits>().speed = selectedMaleBunny.GetComponent<BunnyTraits>().speed; }
-            else if (random == 1) { newBunnyObject.GetComponent<BunnyTraits>().speed = selectedFemaleBunny.GetComponent<BunnyTraits>().speed; }
+            random = Random.Range(0, (100 + mutationRate));
+            Debug.Log(random);
+            if (random < 50) { newBunnyObject.GetComponent<GA_Traits>().speed = selectedMaleBunny.GetComponent<GA_Traits>().speed; }
+            else if (random >= 50 && random < 100) { newBunnyObject.GetComponent<GA_Traits>().speed = selectedFemaleBunny.GetComponent<GA_Traits>().speed; }
+            else { newBunnyObject.GetComponent<GA_Traits>().speed = Random.Range(0, 10); Debug.Log("Mutation" + random); }
 
-            random = Random.Range(0, 2);
-            if (random == 0) { newBunnyObject.GetComponent<BunnyTraits>().sigth = selectedMaleBunny.GetComponent<BunnyTraits>().sigth; }
-            else if (random == 1) { newBunnyObject.GetComponent<BunnyTraits>().sigth = selectedFemaleBunny.GetComponent<BunnyTraits>().sigth; }
+            random = Random.Range(0, (100 + mutationRate));
+            Debug.Log(random);
+            if (random < 50) { newBunnyObject.GetComponent<GA_Traits>().sight = selectedMaleBunny.GetComponent<GA_Traits>().sight; }
+            else if (random >= 50 && random < 100) { newBunnyObject.GetComponent<GA_Traits>().sight = selectedFemaleBunny.GetComponent<GA_Traits>().sight; }
+            else if (random >= 100) { newBunnyObject.GetComponent<GA_Traits>().sight = Random.Range(0, 6); Debug.Log("Mutation" + random); }
 
-            random = Random.Range(0, 2);
-            if (random == 0) { newBunnyObject.GetComponent<BunnyTraits>().health = selectedMaleBunny.GetComponent<BunnyTraits>().health; }
-            else if (random == 1) { newBunnyObject.GetComponent<BunnyTraits>().health = selectedFemaleBunny.GetComponent<BunnyTraits>().health; }
+            random = Random.Range(0, (100 + mutationRate));
+            Debug.Log(random);
+            if (random < 50) { newBunnyObject.GetComponent<GA_Traits>().spec = selectedMaleBunny.GetComponent<GA_Traits>().spec; }
+            else if (random >= 50 && random < 100) { newBunnyObject.GetComponent<GA_Traits>().spec = selectedFemaleBunny.GetComponent<GA_Traits>().spec; }
+            else { newBunnyObject.GetComponent<GA_Traits>().spec = Random.Range(0, 5); Debug.Log("Mutation" + random); }
 
         }
         else if (indiv == "fox")
@@ -65,20 +71,44 @@ public class GA_Crossover : MonoBehaviour {
             newFoxObject = population.genIndividual("fox", "random");
             int random;
 
-            random = Random.Range(0, 2);
-            if (random == 0) { newFoxObject.GetComponent<FoxTraits>().speed = selectedMaleFox.GetComponent<FoxTraits>().speed; }
-            else if (random == 1) { newFoxObject.GetComponent<FoxTraits>().speed = selectedFemaleFox.GetComponent<FoxTraits>().speed; }
+            random = Random.Range(0, (100 + mutationRate));
+            Debug.Log(random);
+            if (random < 50) { newFoxObject.GetComponent<GA_Traits>().speed = selectedMaleFox.GetComponent<GA_Traits>().speed; }
+            else if (random >= 50 && random < 100) { newFoxObject.GetComponent<GA_Traits>().speed = selectedFemaleFox.GetComponent<GA_Traits>().speed; }
+            else { newBunnyObject.GetComponent<GA_Traits>().speed = Random.Range(0, 10); Debug.Log("Mutation" + random); }
 
-            random = Random.Range(0, 2);
-            if (random == 0) { newFoxObject.GetComponent<FoxTraits>().sight = selectedMaleFox.GetComponent<FoxTraits>().sight; }
-            else if (random == 1) { newFoxObject.GetComponent<FoxTraits>().sight = selectedFemaleFox.GetComponent<FoxTraits>().sight; }
+            random = Random.Range(0, (100 + mutationRate));
+            Debug.Log(random);
+            if (random < 50) { newFoxObject.GetComponent<GA_Traits>().sight = selectedMaleFox.GetComponent<GA_Traits>().sight; }
+            else if (random > 50 && random < 100) { newFoxObject.GetComponent<GA_Traits>().sight = selectedFemaleFox.GetComponent<GA_Traits>().sight; }
+            else { newBunnyObject.GetComponent<GA_Traits>().sight = Random.Range(0, 6); Debug.Log("Mutation" + random); }
 
-            random = Random.Range(0, 2);
-            if (random == 0) { newFoxObject.GetComponent<FoxTraits>().attack = selectedMaleFox.GetComponent<FoxTraits>().attack; }
-            else if (random == 1) { newFoxObject.GetComponent<FoxTraits>().attack = selectedFemaleFox.GetComponent<FoxTraits>().attack; }
-
+            random = Random.Range(0, (100 + mutationRate));
+            Debug.Log(random);
+            if (random < 50) { newFoxObject.GetComponent<GA_Traits>().spec = selectedMaleFox.GetComponent<GA_Traits>().spec; }
+            else if (random >= 50 && random < 100) { newFoxObject.GetComponent<GA_Traits>().spec = selectedFemaleFox.GetComponent<GA_Traits>().spec; }
+            else { newBunnyObject.GetComponent<GA_Traits>().spec = Random.Range(0, 5); Debug.Log("Mutation" + random); }
         }
-
     }
 
+    void crossover(string indiv)
+    {
+        newObj = population.genIndividual(indiv, "random");
+        newObj.GetComponent<GA_Traits>().isChild = true;
+
+        GameObject selectedMale = ((indiv == "bunny") ? gameObject.GetComponent<GA_Selection>().selectedMaleBunny : gameObject.GetComponent<GA_Selection>().selectedMaleFox);
+        GameObject selectedFemale = ((indiv == "bunny") ? gameObject.GetComponent<GA_Selection>().selectedFemaleBunny : gameObject.GetComponent<GA_Selection>().selectedFemaleFox);
+
+         Debug.Log("Parents: " + selectedMale + " + " + selectedFemale);
+        int random;
+        for(int i = 0; i < newObj.GetComponent<GA_Traits>().traitsArray.Length; i++)
+        {
+
+            random = Random.Range(0, (100 + mutationRate));
+            if (random < 50) { newObj.GetComponent<GA_Traits>().traitsArray[i] = selectedMale.GetComponent<GA_Traits>().traitsArray[i]; Debug.Log("Trait"+i+" from father: " + selectedMale.GetComponent<GA_Traits>().traitsArray[i] + " " + newObj.GetComponent<GA_Traits>().traitsArray[i]); }
+            else if (random >= 50 && random < 100) { newObj.GetComponent<GA_Traits>().traitsArray[i] = selectedFemale.GetComponent<GA_Traits>().traitsArray[i]; Debug.Log("Trait" + i + " from mother: " + selectedFemale.GetComponent<GA_Traits>().traitsArray[i] + " " + newObj.GetComponent<GA_Traits>().traitsArray[i]); }
+            else { newObj.GetComponent<GA_Traits>().genRandomTrait(i); Debug.Log("Muatation" + i); }
+        }
+    }
 }
+

@@ -7,12 +7,6 @@ public class GA_Selection : MonoBehaviour {
     GameObject bunnyParent;
     GameObject foxParent;
 
-    GameObject bunnyGO;
-    GameObject foxGO;
-
-    BunnyTraits bunnyTraits;
-    FoxTraits foxTraits;
-
     float maleBunnySum;
     float femaleBunnySum;
     float maleFoxSum;
@@ -23,8 +17,7 @@ public class GA_Selection : MonoBehaviour {
     public GameObject selectedMaleFox;
     public GameObject selectedFemaleFox;
 
-    float time = 0;
-    float timeUntilNextSelection = 3;
+    float time = 3;
 
     private void Start()
     {
@@ -35,8 +28,8 @@ public class GA_Selection : MonoBehaviour {
     private void Update()
     {
 
-        time += Time.deltaTime;
-        if (time > timeUntilNextSelection)
+        time -= Time.deltaTime;
+        if (time <= 0)
         {
             addSum("bunny", "male");
             addSum("bunny", "female");
@@ -52,8 +45,8 @@ public class GA_Selection : MonoBehaviour {
             //Debug.Log("Selected Female Bunny: " + selectedFemaleBunny.name);
             //Debug.Log("Selected Male Fox: " + selectedMaleFox.name);
             //Debug.Log("Selected Female Fox: " + selectedFemaleFox.name);
+            time = 3;
         }
-
     }
 
     void addSum(string indiv, string gender)
@@ -62,16 +55,16 @@ public class GA_Selection : MonoBehaviour {
         {
             for (int i = 0; i < bunnyParent.transform.childCount; i++)
             {
-                if (gender == "male" && bunnyParent.transform.GetChild(i).tag == "male") { maleBunnySum += bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness; }
-                else if (gender == "female" && bunnyParent.transform.GetChild(i).tag == "female") { femaleBunnySum += bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness; }
+                if (gender == "male" && bunnyParent.transform.GetChild(i).tag == "male") { maleBunnySum += bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness; }
+                else if (gender == "female" && bunnyParent.transform.GetChild(i).tag == "female") { femaleBunnySum += bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness; }
             }
         }
         else if (indiv == "fox")
         {
             for (int i = 0; i < foxParent.transform.childCount; i++)
             {
-                if (gender == "male" && foxParent.transform.GetChild(i).tag == "male") { maleFoxSum += foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness; }
-                else if (gender == "female" && foxParent.transform.GetChild(i).tag == "female") { femaleFoxSum += foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness; }
+                if (gender == "male" && foxParent.transform.GetChild(i).tag == "male") { maleFoxSum += foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness; }
+                else if (gender == "female" && foxParent.transform.GetChild(i).tag == "female") { femaleFoxSum += foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness; }
             }
         }
 
@@ -88,12 +81,12 @@ public class GA_Selection : MonoBehaviour {
             {
                 if (gender == "male" && bunnyParent.transform.GetChild(i).tag == "male")
                 {
-                    randSum += bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness;
+                    randSum += bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                     if (rand < randSum) { selectedMaleBunny = bunnyParent.transform.GetChild(i).gameObject; break; }
                 }
                 else if(gender =="female" && bunnyParent.transform.GetChild(i).tag == "female")
                 {
-                    randSum += bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness;
+                    randSum += bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                     if (rand < randSum) { selectedFemaleBunny = bunnyParent.transform.GetChild(i).gameObject; break; }
                 }               
             }
@@ -105,12 +98,12 @@ public class GA_Selection : MonoBehaviour {
             {
                 if (gender == "male" && foxParent.transform.GetChild(i).tag == "male")
                 {
-                    randSum += foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness;
+                    randSum += foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                     if (rand < randSum) { selectedMaleFox = foxParent.transform.GetChild(i).gameObject; break; }
                 }
                 else if (gender == "female" && foxParent.transform.GetChild(i).tag == "female")
                 {
-                    randSum += foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness;
+                    randSum += foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                     if (rand < randSum) { selectedFemaleFox = foxParent.transform.GetChild(i).gameObject; break; }
                 }               
             }

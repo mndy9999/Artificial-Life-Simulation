@@ -23,8 +23,8 @@ public class GA_Population : MonoBehaviour {
 
     private void Start()
     {
-        numberOfBunnies = 10;
-        numberOfFoxes = 10;
+        numberOfBunnies = 2;
+        numberOfFoxes = 2;
 
         spawnArea = Component.FindObjectOfType<Tilemap>();
 
@@ -56,20 +56,20 @@ public class GA_Population : MonoBehaviour {
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 bunnyGO = Instantiate(bunnyArr[0], pos, Quaternion.identity, bunnyParent.transform);
-                bunnyGO.name = "Bunny" + bunnyParent.transform.childCount;
+                bunnyGO.name = indiv + bunnyParent.transform.childCount;
             }
             else if(gender == "female")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 bunnyGO = Instantiate(bunnyArr[1], pos, Quaternion.identity, bunnyParent.transform);
-                bunnyGO.name = "Bunny" + bunnyParent.transform.childCount;
+                bunnyGO.name = indiv + bunnyParent.transform.childCount;
             }
             else if(gender == "random")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 int rand = Random.Range(0, 2);
                 bunnyGO = Instantiate(bunnyArr[rand], pos, Quaternion.identity, bunnyParent.transform);
-                bunnyGO.name = "Bunny" + bunnyParent.transform.childCount;
+                bunnyGO.name = indiv + bunnyParent.transform.childCount;
             }
             return bunnyGO;
         }
@@ -80,21 +80,20 @@ public class GA_Population : MonoBehaviour {
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 foxGO = Instantiate(foxArr[0], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = "Fox" + foxParent.transform.childCount;
-                Debug.Log("Generating Foxes");
+                foxGO.name = indiv + foxParent.transform.childCount;
             }
             else if (gender == "female")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 foxGO = Instantiate(foxArr[1], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = "Fox" + foxParent.transform.childCount;
+                foxGO.name = indiv + foxParent.transform.childCount;
             }
             else if (gender == "random")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 int rand = Random.Range(0, 2);
                 foxGO = Instantiate(foxArr[rand], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = "Fox" + foxParent.transform.childCount;
+                foxGO.name = indiv + foxParent.transform.childCount;
             }
             return foxGO;
         }
@@ -111,9 +110,9 @@ public class GA_Population : MonoBehaviour {
             {
                 for(int i = 0; i < bunnyParent.transform.childCount; i++)
                 {
-                    if(bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness > current && bunnyParent.transform.GetChild(i).tag == "male")
+                    if(bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness > current && bunnyParent.transform.GetChild(i).tag == "male")
                     {
-                        current = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness;
+                        current = bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                         fittest = bunnyParent.transform.GetChild(i).gameObject;
                     }
                 }
@@ -122,9 +121,9 @@ public class GA_Population : MonoBehaviour {
             {
                 for(int i = 0; i < bunnyParent.transform.childCount; i++)
                 {
-                    if (bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness > current && bunnyParent.transform.GetChild(i).tag == "female")
+                    if (bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness > current && bunnyParent.transform.GetChild(i).tag == "female")
                     {
-                        current = bunnyParent.transform.GetChild(i).GetComponent<BunnyTraits>().fitness;
+                        current = bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                         fittest = bunnyParent.transform.GetChild(i).gameObject;
                     }
                 }
@@ -139,9 +138,9 @@ public class GA_Population : MonoBehaviour {
                 for (int i = 0; i < foxParent.transform.childCount; i++)
                 {
                     
-                    if (foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness > current && foxParent.transform.GetChild(i).tag == "male")
+                    if (foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness > current && foxParent.transform.GetChild(i).tag == "male")
                     {
-                        current = foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness;
+                        current = foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                         fittest = foxParent.transform.GetChild(i).gameObject;
                     }
                 }
@@ -150,9 +149,9 @@ public class GA_Population : MonoBehaviour {
             {
                 for (int i = 0; i < foxParent.transform.childCount; i++)
                 {
-                    if (foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness > current && foxParent.transform.GetChild(i).tag == "female")
+                    if (foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness > current && foxParent.transform.GetChild(i).tag == "female")
                     {
-                        current = foxParent.transform.GetChild(i).GetComponent<FoxTraits>().fitness;
+                        current = foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
                         fittest = foxParent.transform.GetChild(i).gameObject;
                     }
                 }

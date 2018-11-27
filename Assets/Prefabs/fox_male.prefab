@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4286897533597882}
   - component: {fileID: 212366991327193162}
-  - component: {fileID: 114674660385018822}
+  - component: {fileID: 114382382881945140}
   m_Layer: 0
   m_Name: fox_male
   m_TagString: male
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114674660385018822
+--- !u!114 &114382382881945140
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,17 +49,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1764494120764546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b3cd77640942d2429f87ddb6f412da8, type: 3}
+  m_Script: {fileID: 11500000, guid: 59fd471b07ea28248a581c779027a3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  individualName: 
+  age: 0
   foodLevel: 0
   speed: 0
   sight: 0
-  attack: 0
+  spec: 0
+  isChild: 0
   collect: 0
   birthTime: 0
   fitness: 0
+  traitsArray: []
 --- !u!212 &212366991327193162
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\GA_Fitness.cs" />
     <Compile Include="Assets\Scripts\GA_Population.cs" />
     <Compile Include="Assets\Scripts\GA_Selection.cs" />
+    <Compile Include="Assets\Scripts\GA_Traits.cs" />
     <Compile Include="Assets\Scripts\Genetic Algorithm\Crossover.cs" />
     <Compile Include="Assets\Scripts\Genetic Algorithm\Fitness.cs" />
     <Compile Include="Assets\Scripts\Genetic Algorithm\Population.cs" />
@@ -76,16 +77,16 @@
     <Compile Include="Assets\Scripts\RandomSpawn.cs" />
     <None Include="Assets\Shaders\$self_illuminated_outlined_diffuse_113.shader" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/16025091/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/16025091/Desktop/Artificial-Life-Simulation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/16025091/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/16025091/Desktop/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/16025091/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/16025091/Desktop/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/16025091/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/16025091/Desktop/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
