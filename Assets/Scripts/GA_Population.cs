@@ -31,8 +31,8 @@ public class GA_Population : MonoBehaviour {
         bunnyParent = GameObject.FindGameObjectWithTag("Bunny Parent");
         foxParent = GameObject.FindGameObjectWithTag("Fox Parent");
 
-       // for (int i = 0; i < numberOfBunnies; i++) { genIndividual("bunny", "random"); }
-       // for (int i = 0; i < numberOfFoxes; i++) { genIndividual("fox", "random"); }
+        for (int i = 0; i < numberOfBunnies; i++) { genIndividual("bunny", "random"); }
+        for (int i = 0; i < numberOfFoxes; i++) { genIndividual("fox", "random"); }
     }
 
     private void Update()
@@ -160,9 +160,5 @@ public class GA_Population : MonoBehaviour {
         return fittest;
     }
 
-    public void print()
-    {
-        Debug.Log("blabla");
-    }
 
 }

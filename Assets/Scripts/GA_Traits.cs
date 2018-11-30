@@ -52,9 +52,12 @@ public class GA_Traits : MonoBehaviour {
     private void Update()
     {
         ageUp();
+        
         speed = traitsArray[0];
         sight = traitsArray[1];
         spec = traitsArray[2];
+
+        foodLevel -= 0.1f;
     }
 
     void ageUp() { age = (int)Time.realtimeSinceStartup - birthTime; }

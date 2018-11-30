@@ -79,15 +79,15 @@ public class GA_Selection : MonoBehaviour {
         {
             for(int i = 0; i < bunnyParent.transform.childCount;i++)
             {
-                if (gender == "male" && bunnyParent.transform.GetChild(i).tag == "male")
+                if (bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().gender == GA_Traits.Gender.male)
                 {
                     randSum += bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
-                    if (rand < randSum) { selectedMaleBunny = bunnyParent.transform.GetChild(i).gameObject; break; }
+                    if (rand < randSum) { selectedMaleBunny = bunnyParent.transform.GetChild(i).gameObject;}
                 }
-                else if(gender =="female" && bunnyParent.transform.GetChild(i).tag == "female")
+                else if(bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().gender == GA_Traits.Gender.female)
                 {
                     randSum += bunnyParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
-                    if (rand < randSum) { selectedFemaleBunny = bunnyParent.transform.GetChild(i).gameObject; break; }
+                    if (rand < randSum) { selectedFemaleBunny = bunnyParent.transform.GetChild(i).gameObject;}
                 }               
             }
 
@@ -96,15 +96,15 @@ public class GA_Selection : MonoBehaviour {
         {
             for (int i = 0; i < foxParent.transform.childCount; i++)
             {
-                if (gender == "male" && foxParent.transform.GetChild(i).tag == "male")
+                if (foxParent.transform.GetChild(i).GetComponent<GA_Traits>().gender == GA_Traits.Gender.male)
                 {
                     randSum += foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
-                    if (rand < randSum) { selectedMaleFox = foxParent.transform.GetChild(i).gameObject; break; }
+                    if (rand < randSum) { selectedMaleFox = foxParent.transform.GetChild(i).gameObject; }
                 }
-                else if (gender == "female" && foxParent.transform.GetChild(i).tag == "female")
+                else if (foxParent.transform.GetChild(i).GetComponent<GA_Traits>().gender == GA_Traits.Gender.female)
                 {
                     randSum += foxParent.transform.GetChild(i).GetComponent<GA_Traits>().fitness;
-                    if (rand < randSum) { selectedFemaleFox = foxParent.transform.GetChild(i).gameObject; break; }
+                    if (rand < randSum) { selectedFemaleFox = foxParent.transform.GetChild(i).gameObject; }
                 }               
             }
         }

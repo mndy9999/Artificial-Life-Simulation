@@ -99,15 +99,14 @@ public class GA_Crossover : MonoBehaviour
         GameObject selectedMale = ((indiv == "bunny") ? gameObject.GetComponent<GA_Selection>().selectedMaleBunny : gameObject.GetComponent<GA_Selection>().selectedMaleFox);
         GameObject selectedFemale = ((indiv == "bunny") ? gameObject.GetComponent<GA_Selection>().selectedFemaleBunny : gameObject.GetComponent<GA_Selection>().selectedFemaleFox);
 
-         Debug.Log("Parents: " + selectedMale + " + " + selectedFemale);
         int random;
         for(int i = 0; i < newObj.GetComponent<GA_Traits>().traitsArray.Length; i++)
         {
 
             random = Random.Range(0, (100 + mutationRate));
-            if (random < 50) { newObj.GetComponent<GA_Traits>().traitsArray[i] = selectedMale.GetComponent<GA_Traits>().traitsArray[i]; Debug.Log("Trait"+i+" from father: " + selectedMale.GetComponent<GA_Traits>().traitsArray[i] + " " + newObj.GetComponent<GA_Traits>().traitsArray[i]); }
-            else if (random >= 50 && random < 100) { newObj.GetComponent<GA_Traits>().traitsArray[i] = selectedFemale.GetComponent<GA_Traits>().traitsArray[i]; Debug.Log("Trait" + i + " from mother: " + selectedFemale.GetComponent<GA_Traits>().traitsArray[i] + " " + newObj.GetComponent<GA_Traits>().traitsArray[i]); }
-            else { newObj.GetComponent<GA_Traits>().genRandomTrait(i); Debug.Log("Muatation" + i); }
+            if (random < 50) { newObj.GetComponent<GA_Traits>().traitsArray[i] = selectedMale.GetComponent<GA_Traits>().traitsArray[i]; }
+            else if (random >= 50 && random < 100) { newObj.GetComponent<GA_Traits>().traitsArray[i] = selectedFemale.GetComponent<GA_Traits>().traitsArray[i];  }
+            else { newObj.GetComponent<GA_Traits>().genRandomTrait(i); }
         }
     }
 }
