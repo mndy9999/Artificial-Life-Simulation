@@ -21,13 +21,19 @@ public class GA_Traits : MonoBehaviour {
     public float fitness;
 
     public float[] traitsArray;
+    
+    public enum Gender { male, female};
+    public Gender gender;
+
+    public string foodSource;
 
     private void Awake()
     {
         birthTime = (int)Time.realtimeSinceStartup;
         if (individualName == null) { individualName = name; }
-
-        foodLevel = 50;
+        genGender();
+        setFoodSource();
+        foodLevel = 60;
 
         traitsArray = new float[3];
 
@@ -61,7 +67,7 @@ public class GA_Traits : MonoBehaviour {
         int rand;
         if (index == 0)
         {
-            rand = Random.Range(0, 10);
+            rand = Random.Range(0, 6);
             speed = rand;
             traitsArray[index] = rand;
         }
@@ -79,6 +85,17 @@ public class GA_Traits : MonoBehaviour {
         }
     }
 
+    public void genGender()
+    {
+        int rand = Random.Range(0, 2);
+        if(rand == 0) { gender = Gender.male; }
+        else { gender = Gender.female; }
+    }
 
+    public void setFoodSource()
+    {
+        if (gameObject.tag == "bunny") { foodSource = "bush"; }
+        else if(gameObject.tag == "fox") { foodSource = "bunny"; }
+    }
 
 }

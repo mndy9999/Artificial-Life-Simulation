@@ -162,9 +162,15 @@ Prefab:
       objectReference: {fileID: 952662873}
     - target: {fileID: 1442075992498998, guid: ef39906aa58a58f47b139c9a614332de, type: 2}
       propertyPath: m_TagString
-      value: male
+      value: bunny
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114693905695348854, guid: ef39906aa58a58f47b139c9a614332de,
+        type: 2}
+      propertyPath: foodLevel
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ef39906aa58a58f47b139c9a614332de, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &482642415 stripped
@@ -266,11 +272,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &938948093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1442075992498998, guid: ef39906aa58a58f47b139c9a614332de,
-    type: 2}
-  m_PrefabInternal: {fileID: 182762192}
 --- !u!4 &938948099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4441074702808608, guid: ef39906aa58a58f47b139c9a614332de,
@@ -7075,10 +7076,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1391332800}
-  - component: {fileID: 1391332799}
-  - component: {fileID: 1391332801}
-  - component: {fileID: 1391332802}
-  - component: {fileID: 1391332803}
   - component: {fileID: 1391332804}
   - component: {fileID: 1391332805}
   - component: {fileID: 1391332806}
@@ -7090,21 +7087,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1391332799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391332798}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b75a5b91c051952448ce77e4eb716d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfBunnies: 10
-  bunnyModels:
-  - {fileID: 1336312142593070, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
-  - {fileID: 1442075992498998, guid: ef39906aa58a58f47b139c9a614332de, type: 2}
 --- !u!4 &1391332800
 Transform:
   m_ObjectHideFlags: 0
@@ -7118,42 +7100,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1391332801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391332798}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fb33e965230dd249855d70e161de4e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1391332802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391332798}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93dee1a721eb3bd489ae37a710bb2903, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  male: {fileID: 0}
-  female: {fileID: 0}
-  timeUntilNextSelection: 3
---- !u!114 &1391332803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1391332798}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fc96d687ddabe408b926d1b6d41e2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1391332804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7335,9 +7281,20 @@ Prefab:
       objectReference: {fileID: 952662873}
     - target: {fileID: 1336312142593070, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
       propertyPath: m_TagString
-      value: female
+      value: bunny
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1336312142593070, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114670253455206504, guid: 3dc7a8ca110e6d7489befa1d9b5ee204,
+        type: 2}
+      propertyPath: foodLevel
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+    - {fileID: 114783427949617994, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 3dc7a8ca110e6d7489befa1d9b5ee204, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1470576713
@@ -7484,6 +7441,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1764494120764546, guid: 8ba524455319af64dbda5cb04aa6a793, type: 2}
+      propertyPath: m_TagString
+      value: fox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ba524455319af64dbda5cb04aa6a793, type: 2}
   m_IsPrefabAsset: 0
@@ -7492,6 +7453,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1336312142593070, guid: 3dc7a8ca110e6d7489befa1d9b5ee204,
     type: 2}
   m_PrefabInternal: {fileID: 1420631505}
+--- !u!114 &1614018311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1614018310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b85ff3b3441ea23419de0d3874c445a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1614018316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4273864670069174, guid: 3dc7a8ca110e6d7489befa1d9b5ee204,
@@ -7580,8 +7552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd88a849a3747544877a6e9e375aac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bunny1GO: {fileID: 938948093}
-  bunny2GO: {fileID: 1614018310}
 --- !u!1001 &1650930786
 Prefab:
   m_ObjectHideFlags: 0
@@ -7620,6 +7590,10 @@ Prefab:
     - target: {fileID: 4172870981006608, guid: 9a7cc428f3748dc47a48026e8ec063bb, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976337328799148, guid: 9a7cc428f3748dc47a48026e8ec063bb, type: 2}
+      propertyPath: m_TagString
+      value: fox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a7cc428f3748dc47a48026e8ec063bb, type: 2}

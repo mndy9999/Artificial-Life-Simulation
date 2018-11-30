@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 50055944538495484}
   - component: {fileID: 61413457420516464}
   - component: {fileID: 114693905695348854}
+  - component: {fileID: 114732000090409074}
+  - component: {fileID: 114270477603602958}
   m_Layer: 0
   m_Name: Rabbit_male
   m_TagString: male
@@ -88,6 +90,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &114270477603602958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442075992498998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b85ff3b3441ea23419de0d3874c445a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114693905695348854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +123,23 @@ MonoBehaviour:
   birthTime: 0
   fitness: 0
   traitsArray: []
+  gender: 0
+  foodSource: 
+--- !u!114 &114732000090409074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442075992498998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d348ef2fc5b4534d801bf2ee7254263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maleBunny: {fileID: 21300000, guid: 2a89bad72c76e604293ca4c70ae15962, type: 3}
+  femaleBunny: {fileID: 21300000, guid: a2317e52ab119154e8282bb2b4a64e46, type: 3}
+  maleFox: {fileID: 21300000, guid: 3d3fda37078d0354ea99abed4e870a9e, type: 3}
+  femaleFox: {fileID: 21300000, guid: 5d9c6b94d5055b0459f09da2d3b18787, type: 3}
 --- !u!212 &212262732951990886
 SpriteRenderer:
   m_ObjectHideFlags: 1
