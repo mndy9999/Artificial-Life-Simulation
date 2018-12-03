@@ -101,7 +101,6 @@ public class MovementController : MonoBehaviour {
         if (transform.position == breedTarget.transform.position)
         {
             traits.foodLevel -= 10;
-            breedTarget.GetComponent<GA_Traits>().foodLevel -= 10;
             population.genIndividual(gameObject.tag, "random");
             breedTarget = null;
         }
