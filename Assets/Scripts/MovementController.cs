@@ -70,12 +70,14 @@ public class MovementController : MonoBehaviour {
 
     void seek()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale * traits.sight, 360);
-        if (foodTarget == null && breedTarget == null)
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale * traits.sight, 360);     //take all the colliders inside the box
+        if (foodTarget == null && breedTarget == null)  //if the individual doesn't have a target
         {
             for (int i = 0; i < colliders.Length; i++)
             {
+                //if the collider gameobject is from the same species, opposite gender and can mate set breed target to gameobject
                 if (colliders[i].tag == gameObject.tag && colliders[i].gameObject.GetComponent<GA_Traits>().gender != traits.gender && colliders[i].gameObject.GetComponent<GA_Traits>().canMate() && traits.canMate()) { breedTarget = colliders[i].gameObject; break; }
+                //if the collider gameobject has the specific food source tag set food target to gameobject
                 if (colliders[i].tag == traits.foodSource) { foodTarget = colliders[i].gameObject; break; }                
             }
         }
@@ -88,10 +90,10 @@ public class MovementController : MonoBehaviour {
 
     void eat()
     {
-        if (transform.position == foodTarget.transform.position)
+        if (Vector3.Distance(transform.position, foodTarget.transform.position) < 0.1f)
         {
             Destroy(foodTarget.gameObject);
-            traits.foodLevel++;
+            traits.foodLevel += 5;
             traits.collect++;
         }
     }
@@ -101,7 +103,7 @@ public class MovementController : MonoBehaviour {
         if (transform.position == breedTarget.transform.position)
         {
             traits.foodLevel -= 10;
-            population.genIndividual(gameObject.tag, "random");
+            population.genIndividual(gameObject.tag, "random"); //create new random individual from the same species
             breedTarget = null;
         }
     }
@@ -111,10 +113,8 @@ public class MovementController : MonoBehaviour {
         if (gameObject.GetComponent<GA_Traits>().canMate()) { Gizmos.color = Color.red; }
         else { Gizmos.color = Color.blue; }
 
-        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
-        if (Time.realtimeSinceStartup > 0)
-            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-            Gizmos.DrawWireCube(transform.position, transform.localScale * gameObject.GetComponent<GA_Traits>().sight);
+        //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+        Gizmos.DrawWireCube(transform.position, transform.localScale * gameObject.GetComponent<GA_Traits>().sight);
     }
 
 }

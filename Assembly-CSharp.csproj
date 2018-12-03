@@ -61,16 +61,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CSV Trial Logger\Example\Scripts\ExampleExperimentController.cs" />
+    <Compile Include="Assets\CSV Trial Logger\Example\Scripts\SphereController.cs" />
+    <Compile Include="Assets\CSV Trial Logger\Example\Scripts\TrialNumberDisplay.cs" />
+    <Compile Include="Assets\CSV Trial Logger\Scripts\TrialLogger.cs" />
+    <Compile Include="Assets\Scripts\ButtonsManager.cs" />
     <Compile Include="Assets\Scripts\GA_Crossover.cs" />
     <Compile Include="Assets\Scripts\GA_Fitness.cs" />
     <Compile Include="Assets\Scripts\GA_Population.cs" />
     <Compile Include="Assets\Scripts\GA_Selection.cs" />
     <Compile Include="Assets\Scripts\GA_Traits.cs" />
     <Compile Include="Assets\Scripts\MovementController.cs" />
-    <Compile Include="Assets\Scripts\PanelTextUpdate.cs" />
-    <Compile Include="Assets\Scripts\RandomSpawn.cs" />
     <Compile Include="Assets\Scripts\SpriteSelector.cs" />
     <None Include="Assets\Shaders\$self_illuminated_outlined_diffuse_113.shader" />
+    <None Include="Assets\CSV Trial Logger\README.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Kim Jong-Un/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

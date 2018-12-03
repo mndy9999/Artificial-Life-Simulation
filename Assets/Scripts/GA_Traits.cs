@@ -9,13 +9,13 @@ public class GA_Traits : MonoBehaviour {
     public int age = 0;
     public float foodLevel = 0;
 
-    public float speed = 1;
-    public float sight = 2;
-    public float spec = 3;      //health for rabbits, attack for foxes
+    public float speed = 0;     //how far they move
+    public float sight = 0;     //how far they see
+    public float spec = 0;      //health for rabbits, attack for foxes **not fully implemented**
 
     public bool isChild = false;
 
-    public float collect = 0;
+    public float collect = 0;   //how many times they ate
 
     public int birthTime;
     public float fitness;
@@ -26,15 +26,17 @@ public class GA_Traits : MonoBehaviour {
     public Gender gender;
 
     public string foodSource;
+    float hunger;   //how much food they lose every frame
 
     private void Awake()
     {
         birthTime = (int)Time.realtimeSinceStartup;
-        if (individualName == null) { individualName = name; }
+
         genGender();
         setFoodSource();
-        foodLevel = 60;
+        setHunger();
 
+        foodLevel = 60;
         traitsArray = new float[3];
 
         if (!isChild)
@@ -46,7 +48,8 @@ public class GA_Traits : MonoBehaviour {
 
         traitsArray[0] = speed;
         traitsArray[1] = sight;
-        traitsArray[2] = spec; 
+        traitsArray[2] = spec;
+ 
     }
 
     private void Update()
@@ -57,7 +60,8 @@ public class GA_Traits : MonoBehaviour {
         sight = traitsArray[1];
         spec = traitsArray[2];
 
-        foodLevel -= 0.1f;
+        foodLevel -= hunger;
+        checkIfDead();
     }
 
     void ageUp() { age = (int)Time.realtimeSinceStartup - birthTime; }
@@ -101,4 +105,9 @@ public class GA_Traits : MonoBehaviour {
         else if(gameObject.tag == "fox") { foodSource = "bunny"; }
     }
 
+    public void setHunger()
+    {
+        if (gameObject.tag == "bunny") { hunger = 0.01f; }
+        else if (gameObject.tag == "fox") { hunger = 0.05f; }
+    }
 }
