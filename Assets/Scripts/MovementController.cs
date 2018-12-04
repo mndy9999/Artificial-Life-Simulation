@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class MovementController : MonoBehaviour {
 
@@ -34,7 +35,8 @@ public class MovementController : MonoBehaviour {
         time -= Time.deltaTime;
         if(time <= 0) { chooseDirection(); time = 2; }
         checkForInput();
-        if(!foodTarget && !breedTarget) { moveRandomly(); seek(); }
+        seek();
+        if(!foodTarget && !breedTarget) { moveRandomly(); }
         else if (breedTarget) { moveTowards(breedTarget.transform.position); breed(); }
         else if(foodTarget){ moveTowards(foodTarget.transform.position); eat(); }
     }
@@ -71,6 +73,10 @@ public class MovementController : MonoBehaviour {
     void seek()
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, transform.localScale * traits.sight, 360);     //take all the colliders inside the box
+
+        if (breedTarget && !colliders.Contains(breedTarget.GetComponent<Collider2D>())){ breedTarget = null; }
+        if (foodTarget && !colliders.Contains(foodTarget.GetComponent<BoxCollider2D>())) { foodTarget = null; }
+
         if (foodTarget == null && breedTarget == null)  //if the individual doesn't have a target
         {
             for (int i = 0; i < colliders.Length; i++)

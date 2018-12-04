@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{258CB020-DF16-4C20-7B6E-7E351311E964}</ProjectGuid>
+    <ProjectGuid>{BD273A00-3B78-3267-06DC-928172B4692B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -71,16 +71,16 @@
     <Compile Include="Assets\Scripts\SpriteSelector.cs" />
     <None Include="Assets\Shaders\$self_illuminated_outlined_diffuse_113.shader" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/16025091.UNI/Desktop/ALS/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/16025091.UNI/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/16025091.UNI/Desktop/ALS/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/16025091.UNI/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/16025091.UNI/Desktop/ALS/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/16025091.UNI/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/16025091.UNI/Desktop/ALS/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/16025091.UNI/Documents/GitHub/Artificial-Life-Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
