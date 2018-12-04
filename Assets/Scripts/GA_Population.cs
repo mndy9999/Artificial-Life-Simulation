@@ -176,7 +176,7 @@ public class GA_Population : MonoBehaviour {
         return fittest;
     }
 
-    void spawnBush()
+    public void spawnBush()
     {
         Vector3Int v = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
         Instantiate(bushGO, v, Quaternion.identity);

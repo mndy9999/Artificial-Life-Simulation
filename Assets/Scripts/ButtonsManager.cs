@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class ButtonsManager : MonoBehaviour {
 
     public GA_Population population;
-    public Button bunnyButton;
-    public Button foxButton;
 
 
     public void genBunny()
@@ -17,5 +15,9 @@ public class ButtonsManager : MonoBehaviour {
     public void genFox()
     {
         population.genIndividual("fox", "random");
+    }
+    public void genBush()
+    {
+        population.spawnBush();
     }
 }

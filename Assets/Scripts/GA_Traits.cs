@@ -67,20 +67,24 @@ public class GA_Traits : MonoBehaviour {
     void ageUp() { age = (int)Time.realtimeSinceStartup - birthTime; }
     void checkIfDead() { if(age > 100 || foodLevel <= 0) { Destroy(gameObject); } }
     
-    public bool canMate() { return foodLevel > 50; }
+    public bool canMate() {
+        if (gameObject.tag == "bunny") return foodLevel > 50;
+        else if (gameObject.tag == "fox") return foodLevel > 40;
+        else return false;
+    }
 
     public void genRandomTrait(int index)
     {
         int rand;
         if (index == 0)
         {
-            rand = Random.Range(0, 6);
+            rand = Random.Range(1, 7);
             speed = rand;
             traitsArray[index] = rand;
         }
         else if (index == 1)
         {
-            rand = Random.Range(0, 6);
+            rand = Random.Range(1, 7);
             sight = rand;
             traitsArray[index] = rand;
         }
