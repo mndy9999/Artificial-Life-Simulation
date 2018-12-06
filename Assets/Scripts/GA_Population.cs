@@ -42,11 +42,20 @@ public class GA_Population : MonoBehaviour {
     {
         //get fittest male and female from each species every 'time' seconds
         time -= Time.deltaTime;
- 
-        if(time <= 0)
+
+        if (time <= 0)
         {
             spawnBush();
             time = 0.5f;
+        }
+
+        if (bunnyParent.transform.childCount <= 4)
+        {
+            genIndividual("bunny", "random");
+        }
+        if (foxParent.transform.childCount <= 4)
+        {
+            genIndividual("fox", "random");
         }
     }
     /// <summary>
@@ -58,7 +67,7 @@ public class GA_Population : MonoBehaviour {
     public GameObject genIndividual(string indiv, string gender)
     {
         //check species and gender
-        if(indiv == "bunny")
+        if(indiv == "bunny" && bunnyParent.transform.childCount <= 20)
         {
             if(gender == "male")
             {
@@ -82,7 +91,7 @@ public class GA_Population : MonoBehaviour {
             }
             return bunnyGO;
         }
-        else if (indiv == "fox")
+        else if (indiv == "fox" && foxParent.transform.childCount <= 20)
         {
             
             if (gender == "male")
