@@ -73,6 +73,7 @@ public class GA_Traits : MonoBehaviour {
         else return false;
     }
 
+    //generate random traits - used for generating the intial population and for mutations
     public void genRandomTrait(int index)
     {
         int rand;
@@ -80,17 +81,17 @@ public class GA_Traits : MonoBehaviour {
         {
             rand = Random.Range(1, 7);
             speed = rand;
-            traitsArray[index] = rand;
+            traitsArray[index] = rand;      //speed
         }
         else if (index == 1)
         {
-            rand = Random.Range(1, 7);
+            rand = Random.Range(1, 7);      //sight
             sight = rand;
             traitsArray[index] = rand;
         }
         else if (index == 2)
         {
-            rand = Random.Range(0, 4);
+            rand = Random.Range(0, 4);      //special
             spec = rand;
             traitsArray[index] = rand;
         }

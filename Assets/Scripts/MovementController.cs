@@ -82,7 +82,8 @@ public class MovementController : MonoBehaviour {
             for (int i = 0; i < colliders.Length; i++)
             {
                 //if the collider gameobject is from the same species, opposite gender and can mate set breed target to gameobject
-                if (colliders[i].tag == gameObject.tag && colliders[i].gameObject.GetComponent<GA_Traits>().gender != traits.gender && colliders[i].gameObject.GetComponent<GA_Traits>().canMate() && traits.canMate()) { breedTarget = colliders[i].gameObject; break; }
+                if (colliders[i].tag == gameObject.tag && colliders[i].gameObject.GetComponent<GA_Traits>().gender != traits.gender 
+                    && colliders[i].gameObject.GetComponent<GA_Traits>().canMate() && traits.canMate()) { breedTarget = colliders[i].gameObject; break; }
                 //if the collider gameobject has the specific food source tag set food target to gameobject
                 if (colliders[i].tag == traits.foodSource) { foodTarget = colliders[i].gameObject; break; }                
             }

@@ -44,7 +44,7 @@ public class GA_Selection : MonoBehaviour
            //Debug.Log("Selected Female Bunny: " + selectedFemaleBunny.name + "    " + selectedFemaleBunny.GetComponent<GA_Traits>().fitness);
            //Debug.Log("Selected Male Fox: " + selectedMaleFox.name);
            //Debug.Log("Selected Female Fox: " + selectedFemaleFox.name);
-            time = 0.5f;
+            time = 3f;
         }       
 
     }

@@ -14,7 +14,7 @@ public class GA_Crossover : MonoBehaviour
     GameObject newObj;
 
     float time = 3;
-    public int mutationRate = 30;
+    public int mutationRate;
 
     private void Start()
     {
@@ -34,8 +34,8 @@ public class GA_Crossover : MonoBehaviour
         if (time <= 0)
         {
             //if the parents are not null, create offspring through crossover
-           // if (selectedMaleBunny && selectedFemaleBunny) { crossover("bunny"); }
-           // if (selectedMaleFox && selectedFemaleFox) { crossover("fox"); }
+            if (selectedMaleBunny && selectedFemaleBunny) { crossover("bunny"); }
+            if (selectedMaleFox && selectedFemaleFox) { crossover("fox"); }
             time = 3;
         }
     }
@@ -49,6 +49,7 @@ public class GA_Crossover : MonoBehaviour
         GameObject selectedMale = ((indiv == "bunny") ? gameObject.GetComponent<GA_Selection>().selectedMaleBunny : gameObject.GetComponent<GA_Selection>().selectedMaleFox);
         GameObject selectedFemale = ((indiv == "bunny") ? gameObject.GetComponent<GA_Selection>().selectedFemaleBunny : gameObject.GetComponent<GA_Selection>().selectedFemaleFox);
 
+        
         int random;
         for(int i = 0; i < newObj.GetComponent<GA_Traits>().traitsArray.Length; i++)
         {

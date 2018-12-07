@@ -8,6 +8,9 @@ public class GA_Population : MonoBehaviour {
     int numberOfBunnies;        
     int numberOfFoxes;
 
+    int bunnyCount = 0;
+    int foxCount = 0;
+
     public GameObject[] bunnyArr;
     public GameObject[] foxArr;
 
@@ -74,21 +77,22 @@ public class GA_Population : MonoBehaviour {
                 //initialize new random position on the map
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 bunnyGO = Instantiate(bunnyArr[0], pos, Quaternion.identity, bunnyParent.transform);    //instantiate new gameobject
-                bunnyGO.name = indiv + bunnyParent.transform.childCount;    //set the name to keep count of the number of individuals
+                bunnyGO.name = indiv + bunnyCount;    //set the name to keep count of the number of individuals
             }
             else if(gender == "female")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 bunnyGO = Instantiate(bunnyArr[1], pos, Quaternion.identity, bunnyParent.transform);
-                bunnyGO.name = indiv + bunnyParent.transform.childCount;
+                bunnyGO.name = indiv + bunnyCount;
             }
             else if(gender == "random")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 int rand = Random.Range(0, 2);
                 bunnyGO = Instantiate(bunnyArr[rand], pos, Quaternion.identity, bunnyParent.transform);
-                bunnyGO.name = indiv + bunnyParent.transform.childCount;
+                bunnyGO.name = indiv + bunnyCount;
             }
+            bunnyCount++;
             return bunnyGO;
         }
         else if (indiv == "fox" && foxParent.transform.childCount <= 20)
@@ -98,21 +102,22 @@ public class GA_Population : MonoBehaviour {
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 foxGO = Instantiate(foxArr[0], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = indiv + foxParent.transform.childCount;
+                foxGO.name = indiv + foxCount;
             }
             else if (gender == "female")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 foxGO = Instantiate(foxArr[1], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = indiv + foxParent.transform.childCount;
+                foxGO.name = indiv + foxCount;
             }
             else if (gender == "random")
             {
                 Vector3Int pos = new Vector3Int(Random.Range(-spawnArea.size.x / 2, spawnArea.size.x / 2), Random.Range(-spawnArea.size.y / 2, spawnArea.size.y / 2), 0);
                 int rand = Random.Range(0, 2);
                 foxGO = Instantiate(foxArr[rand], pos, Quaternion.identity, foxParent.transform);
-                foxGO.name = indiv + foxParent.transform.childCount;
+                foxGO.name = indiv + foxCount;
             }
+            foxCount++;
             return foxGO;
         }
         return null;
