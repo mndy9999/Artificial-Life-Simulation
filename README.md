@@ -1,5 +1,4 @@
 # Artificial-Life-Simulation
-**STILL UNDER DEVELOPMENT**
 
 An artificial life simulation that I am developing as part of my coursework for the Artificial Inteligence module.
 
