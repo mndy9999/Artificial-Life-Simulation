@@ -1,6 +1,6 @@
 # Artificial-Life-Simulation
 
-An artificial life simulation that I am developing as part of my coursework for the Artificial Inteligence module.
+An artificial life simulation that I have developed as part of my coursework for the Artificial Intelligence module.
 
 The simulation consists of 3 different species (bushes, bunnies and foxes) that live and interact with each other thus creating a 
 food chain cycle.
